@@ -62,9 +62,9 @@
 
 /* Google Fonts------------------
 	font-family: 'Poppins', sans-serif;
-	font-family: 'Rubik', sans-serif;
+	font-family: 'Roboto', sans-serif;
 */
-@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i");
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i");
 /*----------------------------------------*/
 /*  01. Dfault Style
 /*----------------------------------------*/
@@ -73,7 +73,7 @@
 /*----------------------------------------*/
 body {
   color: #242424;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: normal;
@@ -339,7 +339,7 @@ a.review-links {
   background: #fed700 none repeat scroll 0 0;
   color: #242424;
   display: inline-block;
-  font-family: Montserrat;
+  font-family: Roboto, sans-serif;
   font-size: 14px;
   font-weight: 700;
   height: 50px;
@@ -1617,7 +1617,7 @@ textarea:focus {
   background: #fff;
   border-radius: 5px;
   border: 1px solid #e1e1e1;
-  min-width: 638px;
+  min-width: 520px;
   height: 45px;
   float: left;
 }
@@ -1631,7 +1631,7 @@ textarea:focus {
   color: #242424;
   font-size: 13px;
   border-radius: 15px 0 0 15px;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: 400;
   position: relative;
 }
@@ -1673,7 +1673,7 @@ textarea:focus {
 /*Header Middle Wishlist*/
 .hm-wishlist {
   float: left;
-  margin-right: 25px;
+  margin-right: 5px;
   position: relative;
 }
 .hm-wishlist > a {
@@ -2087,12 +2087,11 @@ textarea:focus {
 .megamenu-holder .hb-megamenu {
   background-image: url(images/menu/li-bg-menu.jpg);
   background-size: cover;
-  background-position: top;
+  background-position: bottom right !important;
   background-repeat: no-repeat;
   top: auto;
   left: 0;
   z-index: 99;
-  width: 100%;
 }
 .megamenu-holder .hb-megamenu {
   width: auto;
@@ -2307,7 +2306,7 @@ textarea:focus {
   color: #c8c8c8;
   cursor: pointer;
   display: inline-block;
-  font-family: "Rubik", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: 18px;
@@ -4024,7 +4023,7 @@ thead {
   border-bottom: 1px solid #d8d8d8;
   border-right: medium none;
   font-size: 14px;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   padding: 15px 0;
   text-align: center;
 }
@@ -4256,7 +4255,7 @@ thead {
 .table-content table td.product-subtotal {
   font-size: 16px;
   font-weight: 700;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #414141;
 }
 .table-content table td .cart-plus-minus {
@@ -4321,7 +4320,7 @@ thead {
   padding: 10px 30px;
   border-bottom: 1px solid #ebebeb;
   font-weight: 700;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 .cart-page-total ul > li > span {
   float: right;
