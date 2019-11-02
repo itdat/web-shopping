@@ -4762,12 +4762,11 @@ thead {
   min-width: 250px;
 }
 .compare-pdoduct-image {
-  max-width: 200px;
   display: inline-block;
   padding: 20px 0;
 }
 .compare-pdoduct-image a {
-  display: inline-block;
+  display: block;
 }
 .compare-pdoduct-image .ho-button {
   margin-top: 25px;
