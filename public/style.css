@@ -156,6 +156,8 @@ ul {
 li {
   list-style: none;
 }
+.product-desc ul,
+.content ul,
 p {
   font-size: 14px;
   font-weight: normal;
@@ -163,6 +165,7 @@ p {
   color: #898989;
   margin-bottom: 15px;
 }
+
 hr {
   margin: 60px 0;
   padding: 0px;
@@ -2487,7 +2490,13 @@ textarea:focus {
   float: right;
   color: #e80f0f;
 }
-.product_desc .product_desc_info .old-price {
+
+.product-info .price-box .discount-percentage {
+  color: #e80f0f;
+}
+
+.product_desc .product_desc_info .old-price,
+.price-box .old-price {
   color: #666;
   font-size: 14px;
   font-weight: 400;
@@ -4113,7 +4122,6 @@ thead {
   font-size: 14px;
   margin-bottom: 12px;
   font-weight: 500;
-  text-transform: capitalize;
 }
 .login-form .nice-select {
   width: 100%;

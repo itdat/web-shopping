@@ -3,45 +3,45 @@ var router = express.Router();
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  res.render("index", { title: "Express", layout: "layout-index" });
+  res.render("index", { title: "Trang chủ", layout: "layout-index" });
 });
 router.get("/index.html", function(req, res, next) {
-  res.render("index", { title: "Express", layout: "layout-index" });
+  res.render("index", { title: "Trang chủ", layout: "layout-index" });
 });
 
 /* GET about page. */
 router.get("/about-us.html", function(req, res, next) {
-  res.render("about-us", { title: "About Us" });
+  res.render("about-us", { title: "Thông tin" });
 });
 
 /* GET contact page. */
 router.get("/contact.html", function(req, res, next) {
-  res.render("contact", { title: "Contact" });
+  res.render("contact", { title: "Liên hệ" });
 });
 
 /* GET checkout page. */
 router.get("/checkout.html", function(req, res, next) {
-  res.render("checkout", { title: "Checkout" });
+  res.render("checkout", { title: "Phương thức thanh toán" });
 });
 
 /* GET shopping cart page. */
 router.get("/shopping-cart.html", function(req, res, next) {
-  res.render("shopping-cart", { title: "View Full Cart" });
+  res.render("shopping-cart", { title: "Xem giỏ hàng" });
 });
 
 /* GET wishlist page. */
 router.get("/wishlist.html", function(req, res, next) {
-  res.render("wishlist", { title: "Wishlist" });
+  res.render("wishlist", { title: "Danh sách yêu thích" });
 });
 
 /* GET FAQ page. */
 router.get("/faq.html", function(req, res, next) {
-  res.render("faq", { title: "FAQ" });
+  res.render("faq", { title: "Câu hỏi thường gặp" });
 });
 
 /* GET login/register page. */
 router.get("/login-register.html", function(req, res, next) {
-  res.render("login-register", { title: "Login/Register" });
+  res.render("login-register", { title: "Đăng nhập / Đăng ký" });
 });
 
 /* GET shop 3 columns page. */
@@ -81,7 +81,10 @@ router.get("/shop-list-right-sidebar.html", function(req, res, next) {
 
 /* GET single product page. */
 router.get("/single-product.html", function(req, res, next) {
-  res.render("single-product", { title: "Product" });
+  res.render("single-product", {
+    title:
+      "Apple Macbook Pro Touch Bar 2019 - 15 Inchs (I7/ 16GB/ 256GB) - Hàng Nhập Khẩu Chính Hãng"
+  });
 });
 
 /* GET single product affiliate page. */
