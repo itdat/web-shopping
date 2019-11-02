@@ -3764,6 +3764,26 @@ li.right-menu .cat-mega-menu-2 > li {
   font-size: 12px;
   text-transform: capitalize;
 }
+
+.delivery {
+  color: #fed700;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.delivered {
+  color: #039b0f;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.cancelled {
+  color: #eb3e32;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+0055fe
 .table-content table td.li-product-stock-status span.out-stock {
   color: #eb3e32;
 }

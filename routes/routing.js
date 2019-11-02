@@ -34,6 +34,11 @@ router.get("/wishlist.html", function(req, res, next) {
   res.render("wishlist", { title: "Danh sách yêu thích" });
 });
 
+/* GET history page. */
+router.get("/history.html", function(req, res, next) {
+  res.render("history", { title: "Lịch sử giao dịch" });
+});
+
 /* GET FAQ page. */
 router.get("/faq.html", function(req, res, next) {
   res.render("faq", { title: "Câu hỏi thường gặp" });
