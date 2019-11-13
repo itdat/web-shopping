@@ -1,12 +1,33 @@
 var express = require("express");
 var router = express.Router();
 
+const pool = require("../db-config");
+
 /* GET home page. */
 router.get("/", function(req, res, next) {
-  res.render("index", { title: "Trang chủ", layout: "layout-index" });
+  pool.query("SELECT * FROM products", (err, res1) => {
+    if (err) {
+      throw err;
+    }
+    console.log(res1.rows);
+    res.render("index", {
+      title: "Trang chủ",
+      layout: "layout-index",
+      products: res1.rows
+    });
+  });
 });
 router.get("/index.html", function(req, res, next) {
-  res.render("index", { title: "Trang chủ", layout: "layout-index" });
+  pool.query("SELECT * FROM test", (err, res1) => {
+    if (err) {
+      throw err;
+    }
+    res.render("index", {
+      title: "Trang chủ",
+      layout: "layout-index",
+      data: res1.rows[2].name
+    });
+  });
 });
 
 /* GET about page. */
