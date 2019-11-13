@@ -18,14 +18,15 @@ router.get("/", function(req, res, next) {
   });
 });
 router.get("/index.html", function(req, res, next) {
-  pool.query("SELECT * FROM test", (err, res1) => {
+  pool.query("SELECT * FROM products", (err, res1) => {
     if (err) {
       throw err;
     }
+    console.log(res1.rows);
     res.render("index", {
       title: "Trang chủ",
       layout: "layout-index",
-      data: res1.rows[2].name
+      products: res1.rows
     });
   });
 });
