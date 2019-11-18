@@ -2489,6 +2489,7 @@ textarea:focus {
 .featured-price-box .discount-percentage {
   float: right;
   color: #e80f0f;
+  font-size: 13px;
 }
 
 .product-info .price-box .discount-percentage {
@@ -2498,7 +2499,7 @@ textarea:focus {
 .product_desc .product_desc_info .old-price,
 .price-box .old-price {
   color: #666;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 400;
   text-decoration: line-through;
 }
