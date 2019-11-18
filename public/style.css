@@ -1236,7 +1236,7 @@ textarea:focus {
 }
 
 .product-details-view-content .product-info h2 {
-  font-size: 18px;
+  font-size: 2rem;
   letter-spacing: -0.025em;
   line-height: 24px;
   color: #0363cd;
@@ -1309,7 +1309,6 @@ textarea:focus {
   background: #5d9cec;
 }
 .cart-quantity {
-  margin-top: 25px;
   overflow: hidden;
   float: left;
   width: 100%;
@@ -1322,9 +1321,9 @@ textarea:focus {
 .cart-quantity .add-to-cart {
   border: none;
   font-size: 14px;
-  color: #242424;
+  color: #fff;
   position: relative;
-  background: #fed700;
+  background: #293a6c;
   cursor: pointer;
   font-weight: 500;
   text-transform: capitalize;
@@ -1412,7 +1411,7 @@ textarea:focus {
   right: auto;
 }
 .product-details-thumbs .slick-arrow:hover {
-  background: #fed700;
+  background: #293a6c;
   color: #ffffff;
 }
 .product-details-thumbs .slick-arrow.slick-next,
@@ -1436,6 +1435,11 @@ textarea:focus {
   opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 }
+
+.slick-slider .slick-list {
+  margin-top: 1.5rem;
+}
+
 .modal-body .product-social-sharing {
   padding-bottom: 43px;
 }
@@ -2499,7 +2503,7 @@ textarea:focus {
 .product_desc .product_desc_info .old-price,
 .price-box .old-price {
   color: #666;
-  font-size: 11px;
+  /* font-size: 11px; */
   font-weight: 400;
   text-decoration: line-through;
 }
@@ -2842,7 +2846,7 @@ textarea:focus {
   content: "";
   position: absolute;
   bottom: -23px;
-  background: #fed700;
+  background: #293a6c;
   height: 1px;
   left: 0;
   right: 0;

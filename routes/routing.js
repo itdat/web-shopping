@@ -113,15 +113,46 @@ router.get("/login-register.html", function(req, res, next) {
 });
 
 /* GET shop left sidebar page. */
-router.get("/shop-left-sidebar.html", function(req, res, next) {
-  res.render("shop-left-sidebar", { title: "Danh sách sản phẩm" });
+router.get("/shop-left-sidebar.html", async function(req, res, next) {
+  const allProducts = await pool.query(
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products'
+  );
+
+  const cardInfo = require("../card-info");
+
+  cardInfo.getCardInfo(allProducts);
+
+  console.log(allProducts.rows);
+  res.render("shop-left-sidebar", {
+    title: "Danh sách sản phẩm",
+    layout: "layout",
+    allProducts: allProducts.rows
+  });
 });
 
 /* GET single product page. */
-router.get("/single-product.html", function(req, res, next) {
+router.get("/single-product-:id", async function(req, res, next) {
+  const productDetails = await pool.query(
+    "SELECT * FROM products WHERE id = " + req.params.id
+  );
+
+  const relateProducts = await pool.query(
+    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand = \'' +
+      productDetails.rows[0].brand +
+      "'"
+  );
+
+  const cardInfo = require("../card-info");
+
+  cardInfo.getCardInfo(relateProducts);
+  cardInfo.getCardInfo(productDetails);
+
+  console.log(productDetails.rows);
   res.render("single-product", {
-    title:
-      "Apple Macbook Pro Touch Bar 2019 - 15 Inchs (I7/ 16GB/ 256GB) - Hàng Nhập Khẩu Chính Hãng"
+    title: productDetails.rows[0].name,
+    layout: "layout",
+    productDetails: productDetails.rows[0],
+    relateProducts: relateProducts.rows
   });
 });
 

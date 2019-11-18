@@ -7,43 +7,31 @@
         <div class="product-details-left">
           <div class="product-details-images slider-navigation-1">
             <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/1.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/1.jpg" alt="product image">
+              <a class="popup-img venobox vbox-item" href="images/product/large-size/{{productDetails.images}}"
+                data-gall="myGallery">
+                <img src="images/product/large-size/{{productDetails.images}}" alt="product image">
               </a>
             </div>
             <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/2.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/2.jpg" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/3.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/3.jpg" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/4.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/4.jpg" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/5.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/5.jpg" alt="product image">
-              </a>
-            </div>
-            <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="images/product/large-size/6.jpg" data-gall="myGallery">
-                <img src="images/product/large-size/6.jpg" alt="product image">
+              <a class="popup-img venobox vbox-item" href="images/product/large-size/{{productDetails.images}}"
+                data-gall="myGallery">
+                <img src="images/product/large-size/{{productDetails.images}}" alt="product image">
               </a>
             </div>
           </div>
           <div class="product-details-thumbs slider-thumbs-1">
-            <div class="sm-image"><img src="images/product/small-size/1.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="images/product/small-size/2.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="images/product/small-size/3.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="images/product/small-size/4.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="images/product/small-size/5.jpg" alt="product image thumb"></div>
-            <div class="sm-image"><img src="images/product/small-size/6.jpg" alt="product image thumb"></div>
+            <div class="sm-image"><img src="images/product/large-size/{{productDetails.images}}"
+                alt="product image thumb"></div>
+            <div class="sm-image"><img src="images/product/large-size/{{productDetails.images}}"
+                alt="product image thumb"></div>
+            <div class="sm-image"><img src="images/product/large-size/{{productDetails.images}}"
+                alt="product image thumb"></div>
+            <div class="sm-image"><img src="images/product/large-size/{{productDetails.images}}"
+                alt="product image thumb"></div>
+            <div class="sm-image"><img src="images/product/large-size/{{productDetails.images}}"
+                alt="product image thumb"></div>
+            <div class="sm-image"><img src="images/product/large-size/{{productDetails.images}}"
+                alt="product image thumb"></div>
           </div>
         </div>
         <!--// Product Details Left -->
@@ -52,43 +40,34 @@
       <div class="col-lg-7 col-md-6">
         <div class="product-details-view-content pt-60">
           <div class="product-info">
-            <h2>Apple Macbook Pro Touch Bar 2019 - 15 inchs (i7/ 16GB/ 256GB) - Hàng Nhập Khẩu Chính Hãng</h2>
-            <span class="product-details-ref">Thương hiệu: Apple</span>
+            <h2>{{productDetails.name}}</h2>
+            <span class="product-details-ref">Thương hiệu: {{productDetails.brand}}</span>
             <div class="rating-box pt-20">
               <ul class="rating rating-with-review-item">
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-                <li class="no-star"><i class="fa fa-star-o"></i></li>
-                <li class="no-star"><i class="fa fa-star-o"></i></li>
+                <li class="{{productDetails.rating.[0]}}"><i class="fa fa-star-o"></i></li>
+                <li class="{{productDetails.rating.[1]}}"><i class="fa fa-star-o"></i></li>
+                <li class="{{productDetails.rating.[2]}}"><i class="fa fa-star-o"></i></li>
+                <li class="{{productDetails.rating.[3]}}"><i class="fa fa-star-o"></i></li>
+                <li class="{{productDetails.rating.[4]}}"><i class="fa fa-star-o"></i></li>
                 <li class="review-item"><a href="#">Xem đánh giá sản phẩm</a></li>
                 <li class="review-item"><a href="#">Viết đánh giá sản phẩm</a></li>
               </ul>
             </div>
             <div class="price-box pt-20">
-              <p class="new-price new-price-2">56.669.000₫</p>
-              <p>Giá thị trường: <span class="old-price">79.990.000₫</span></p>
-              <p>Tiết kiệm đến: <span class="discount-percentage">29%</span></p>
+              <p class="new-price new-price-2">{{productDetails.newPrice}}₫</p>
+              <p>Giá thị trường: <span class="old-price">{{productDetails.price}}₫</span></p>
+              <p>Tiết kiệm đến: <span class="discount-percentage">{{productDetails.promote}}%</span></p>
             </div>
             <div class="product-desc">
-              <ul>
+              {{!-- <ul>
                 <li>Chip: 2.6GHz 6-core 9th-generation Intel Core i7 processor (I9-9750H, Turbo 4.5GHz, Cache 12MB)</li>
                 <li>RAM: 16GB 2400MHz DDR4 memory</li>
                 <li>Ổ cứng: 256GB SSD storage</li>
                 <li>Chipset đồ hoạ: Radeon Pro 555X with 4GB DDR5 memory + Intel UHD Graphics 630</li>
                 <li>Màn hình: 15.4 inch Retina Display with True Tone (2880 x 1800)</li>
                 <li>Hệ điều hành: Preinstalled macOS Mojave</li>
-              </ul>
-            </div>
-            <div class="product-variants">
-              <div class="produt-variants-size">
-                <label>Kích thước</label>
-                <select class="nice-select">
-                  <option value="1" title="S" selected="selected">40x60cm</option>
-                  <option value="2" title="M">60x90cm</option>
-                  <option value="3" title="L">80x120cm</option>
-                </select>
-              </div>
+              </ul> --}}
+              <p>{{productDetails.description}}</p>
             </div>
             <div class="single-add-to-cart">
               <form action="#" class="cart-quantity">
@@ -168,7 +147,7 @@
       <div id="description" class="tab-pane active show" role="tabpanel">
         <div class="product-description">
           <div class="product-content-detail">
-            <div id="gioi-thieu" class="content js-content expand" itemprop="description" style="max-height: none;">
+            {{!-- <div id="gioi-thieu" class="content js-content expand" itemprop="description" style="max-height: none;">
               <h5>Thiết kế cao cấp, sang trọng</h5>
               <p><strong>Apple Macbook Pro Touch Bar 2019 - 15 inchs (i7/ 16GB/ 256GB)</strong> được thiết kế sang
                 trọng, tinh tế với khung làm bằng hợp kim nhôm đảm bảo được toàn bộ kiến trúc của máy có một trọng lượng
@@ -235,7 +214,8 @@
                 cao (lên đến 40 Gbps), xuất hình ảnh, âm thanh và có thể dùng cho việc sạc sạc pin.</p>
               <p><img class="d-block mx-auto" alt="" width=" 748" height="280"
                   src="https://salt.tikicdn.com/ts/tmp/4f/64/c2/f8b1f702d8513c4702880709130ce8aa.jpg"></p>
-            </div>
+            </div> --}}
+            <p class="h3">{{productDetails.description}}</p>
           </div>
         </div>
       </div>
@@ -506,35 +486,40 @@
         </div>
         <div class="row">
           <div class="product-active owl-carousel">
+            {{#each relateProducts}}
             <div class="col-lg-12">
               <!-- single-product-wrap start -->
               <div class="single-product-wrap">
                 <div class="product-image">
                   <a href="single-product.html">
-                    <img src="images/product/large-size/20.jpg" alt="Li's Product Image">
+                    <img src="images/product/large-size/{{images}}" alt="Li's Product Image">
                   </a>
+                  {{#if new}}
                   <span class="sticker">Mới</span>
+                  {{/if}}
                 </div>
                 <div class="product_desc">
                   <div class="product_desc_info">
                     <div class="product-review">
                       <h5 class="manufacturer">
-                        <a href="product-details.html">Smartphone</a>
+                        <a href="product-details.html">{{brand}}</a>
                       </h5>
                       <div class="rating-box">
                         <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
+                          <li class="{{rating.[0]}}"><i class="fa fa-star-o"></i></li>
+                          <li class="{{rating.[1]}}"><i class="fa fa-star-o"></i></li>
+                          <li class="{{rating.[2]}}"><i class="fa fa-star-o"></i></li>
+                          <li class="{{rating.[3]}}"><i class="fa fa-star-o"></i></li>
+                          <li class="{{rating.[4]}}"><i class="fa fa-star-o"></i></li>
                         </ul>
                       </div>
                     </div>
-                    <h4><a class="product_name" href="single-product.html">Điện thoại Nokia 6.1 Plus - Hàng Chính
-                        Hãng</a></h4>
+                    <h4><a class="product_name" href="single-product.html">{{name}}</a>
+                    </h4>
                     <div class="price-box">
-                      <span class="new-price">3.390.000₫</span>
+                      <span class="new-price new-price-2">{{newPrice}}₫</span>
+                      <span class="old-price">{{price}}₫</span>
+                      <span class="discount-percentage">-{{promote}}%</span>
                     </div>
                   </div>
                   <div class="add-actions">
@@ -549,227 +534,7 @@
               </div>
               <!-- single-product-wrap end -->
             </div>
-            <div class="col-lg-12">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="images/product/large-size/11.jpg" alt="Li's Product Image">
-                  </a>
-                  <span class="sticker">Mới</span>
-                </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a href="product-details.html">Smartwatch</a>
-                      </h5>
-                      <div class="rating-box">
-                        <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <h4><a class="product_name" href="single-product.html">Đồng hồ định vị SmartKID GPS -HW11 cao
-                        cấp</a></h4>
-                    <div class="price-box">
-                      <span class="new-price new-price-2">1.800.000₫</span>
-                      <span class="old-price">2.000.000₫</span>
-                      <span class="discount-percentage">-10%</span>
-                    </div>
-                  </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                      <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i
-                            class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- single-product-wrap end -->
-            </div>
-            <div class="col-lg-12">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="images/product/large-size/10.jpg" alt="Li's Product Image">
-                  </a>
-                  <span class="sticker">Mới</span>
-                </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a href="product-details.html">Smartphone</a>
-                      </h5>
-                      <div class="rating-box">
-                        <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <h4><a class="product_name" href="single-product.html">Điện Thoại Xiaomi Mi 8 Lite (4GB / 64GB) -
-                        Hàng Chính Hãng</a></h4>
-                    <div class="price-box">
-                      <span class="new-price">3.790.000₫</span>
-                    </div>
-                  </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                      <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i
-                            class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- single-product-wrap end -->
-            </div>
-            <div class="col-lg-12">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="images/product/large-size/9.jpg" alt="Li's Product Image">
-                  </a>
-                  <span class="sticker">Mới</span>
-                </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a href="product-details.html">Smartphone</a>
-                      </h5>
-                      <div class="rating-box">
-                        <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <h4><a class="product_name" href="single-product.html">Điện Thoại iPhone 6s Plus 32GB VN/A - Hàng
-                        Chính Hãng</a></h4>
-                    <div class="price-box">
-                      <span class="new-price new-price-2">8.249.000₫</span>
-                      <span class="old-price">10.990.000₫</span>
-                      <span class="discount-percentage">-25%</span>
-                    </div>
-                  </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                      <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i
-                            class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- single-product-wrap end -->
-            </div>
-            <div class="col-lg-12">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="images/product/large-size/8.jpg" alt="Li's Product Image">
-                  </a>
-                  <span class="sticker">Mới</span>
-                </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a href="product-details.html">Máy tính bảng</a>
-                      </h5>
-                      <div class="rating-box">
-                        <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <h4><a class="product_name" href="single-product.html">iPad Pro 9.7 inch Wifi 32GB - Nhập Khẩu Chính
-                        Hãng (CPO)</a></h4>
-                    <div class="price-box">
-                      <span class="new-price">8.490.000₫</span>
-                    </div>
-                  </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                      <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i
-                            class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- single-product-wrap end -->
-            </div>
-            <div class="col-lg-12">
-              <!-- single-product-wrap start -->
-              <div class="single-product-wrap">
-                <div class="product-image">
-                  <a href="single-product.html">
-                    <img src="images/product/large-size/7.jpg" alt="Li's Product Image">
-                  </a>
-                  <span class="sticker">Mới</span>
-                </div>
-                <div class="product_desc">
-                  <div class="product_desc_info">
-                    <div class="product-review">
-                      <h5 class="manufacturer">
-                        <a href="product-details.html">Tai nghe</a>
-                      </h5>
-                      <div class="rating-box">
-                        <ul class="rating">
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                          <li class="no-star"><i class="fa fa-star-o"></i></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <h4><a class="product_name" href="single-product.html">Tai Nghe Bluetooth Không Dây True Wireless
-                        Xiaomi Haylou GT1 Bluetooth 5.0 - Hàng Chính Hãng</a></h4>
-                    <div class="price-box">
-                      <span class="new-price new-price-2">389.000₫</span>
-                      <span class="old-price">499.000₫</span>
-                      <span class="discount-percentage">-22%</span>
-                    </div>
-                  </div>
-                  <div class="add-actions">
-                    <ul class="add-actions-link">
-                      <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                      <li><a class="links-details" href="single-product.html"><i class="fa fa-heart-o"></i></a></li>
-                      <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i
-                            class="fa fa-eye"></i></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!-- single-product-wrap end -->
-            </div>
+            {{/each}}
           </div>
         </div>
       </div>
