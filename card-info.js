@@ -37,7 +37,14 @@ exports.getCardInfo = function(products) {
   });
 
   // New
-  // products.rows.map(product => {
-
-  // });
+  products.rows.map(product => {
+    let dateRelease = new Date(product.dateRelease.toString());
+    let currentDate = new Date();
+    let distance = Math.round(
+      (currentDate - dateRelease) / (1000 * 60 * 60 * 24)
+    );
+    if (distance > 0 && distance <= 15) {
+      product.new = "new";
+    }
+  });
 };
