@@ -10,13 +10,16 @@ function formatNumber(num) {
 /* GET home page. */
 router.get("/", async function(req, res, next) {
   const newProducts = await pool.query(
-    "SELECT name, brand, price, promote, images, rating FROM products WHERE (SELECT DATEDIFF('day', \"dateRelease\"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10"
+    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE (SELECT DATEDIFF(\'day\', "dateRelease"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10'
   );
   const highRatingProducts = await pool.query(
-    "SELECT name, brand, price, promote, images, rating FROM products WHERE rating >= 4 LIMIT 10"
+    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE rating >= 4 ORDER BY rating DESC LIMIT 10'
   );
   const popularProducts = await pool.query(
-    "SELECT pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10"
+    'SELECT pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating, "dateRelease" FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10'
+  );
+  const appleBrandProducts = await pool.query(
+    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand = \'Apple\' ORDER BY "dateRelease" DESC LIMIT 10'
   );
 
   const cardInfo = require("../card-info");
@@ -24,6 +27,7 @@ router.get("/", async function(req, res, next) {
   cardInfo.getCardInfo(newProducts);
   cardInfo.getCardInfo(highRatingProducts);
   cardInfo.getCardInfo(popularProducts);
+  cardInfo.getCardInfo(appleBrandProducts);
 
   console.log(newProducts.rows);
   res.render("index", {
@@ -31,7 +35,8 @@ router.get("/", async function(req, res, next) {
     layout: "layout-index",
     newProducts: newProducts.rows,
     highRatingProducts: highRatingProducts.rows,
-    popularProducts: popularProducts.rows
+    popularProducts: popularProducts.rows,
+    appleBrandProducts: appleBrandProducts.rows
   });
 });
 
