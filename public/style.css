@@ -319,8 +319,8 @@ textarea {
 /*----------------------------------------*/
 button.li-btn {
   border: none;
-  background: #fed700;
-  color: #242424;
+  background: #222;
+  color: #fff;
   font-size: 20px;
   width: 45px;
   border-radius: 0 2px 2px 0;
@@ -339,8 +339,8 @@ button.li-btn:hover {
 a.links,
 a.links-2,
 a.review-links {
-  background: #fed700 none repeat scroll 0 0;
-  color: #242424;
+  background: #293a6c none repeat scroll 0 0;
+  color: #fff;
   display: inline-block;
   font-family: Roboto, sans-serif;
   font-size: 14px;
@@ -686,7 +686,7 @@ textarea:focus {
 }
 .slider-active .owl-nav div:hover,
 .product-active .owl-nav div:hover {
-  color: #fed700;
+  color: #293a6c;
 }
 .slider-active:hover .owl-nav div,
 .product-active:hover .owl-nav div {
@@ -1695,8 +1695,8 @@ textarea:focus {
   transition: all 0.3s ease-in-out;
 }
 .hm-wishlist > a:hover {
-  border-color: #fed700;
-  color: #fed700;
+  border-color: #222;
+  color: #222;
 }
 /*Header Middle Minicart*/
 .hm-minicart {
@@ -1705,7 +1705,7 @@ textarea:focus {
 }
 .hm-minicart-trigger {
   border-radius: 2px;
-  background: #e80f0f;
+  background: #222;
   color: #fff;
   height: 45px;
   cursor: pointer;
@@ -1746,8 +1746,8 @@ textarea:focus {
   line-height: 26px;
   font-size: 12px;
   font-weight: 400;
-  color: #242424;
-  background: #fed700;
+  color: #fff;
+  background: #d10606;
   text-align: center;
   border-radius: 100%;
 }
@@ -1896,7 +1896,7 @@ textarea:focus {
   position: relative;
   z-index: 1;
   overflow: hidden;
-  background: #fed700;
+  background: #293a6c;
   color: #ffffff;
   line-height: 50px;
   margin-top: 10px;
@@ -1915,7 +1915,7 @@ textarea:focus {
   color: #ffffff;
 }
 .li-button-dark:hover {
-  background: #fed700;
+  background: #293a6c;
   color: #ffffff;
 }
 /*Header Bottom Menu*/
@@ -1954,7 +1954,7 @@ textarea:focus {
 .hb-menu nav > ul > li:hover > a::after {
   color: #ffffff;
 }
-.hb-menu nav > ul > li > a::after {
+.hb-menu nav > ul > li:nth-child(3) > a::after {
   content: "\f107";
   position: absolute;
   top: 8px;
@@ -1963,10 +1963,6 @@ textarea:focus {
   font-size: 18px;
   transition: all 0.3s ease-in-out;
   color: #242424;
-}
-.hb-menu nav > ul > li:first-child > a::after,
-.hb-menu nav > ul > li:nth-child(n + 4) > a::after {
-  content: none;
 }
 .hb-menu nav > ul > li:hover a::after {
   transform: rotate(180deg);
@@ -2294,12 +2290,12 @@ textarea:focus {
   display: block;
 }
 .li-product-menu > li > a.active span::before {
-  background: #fed700;
+  background: #293a6c;
   opacity: 1;
 }
 .li-product-menu > li:hover > a span::before {
   opacity: 1;
-  background: #fed700;
+  background: #293a6c;
 }
 .li-product-menu li span.active::before {
   opacity: 1;
@@ -2559,8 +2555,8 @@ textarea:focus {
   width: 120px;
 }
 .add-actions-link li:hover {
-  background: #fed700;
-  border-color: #fed700;
+  background: #293a6c;
+  border-color: #293a6c;
 }
 .add-actions-link li a {
   color: #a4a4a4;
@@ -2578,7 +2574,7 @@ textarea:focus {
 }
 .add-actions-link li:hover a,
 .add-actions-link li.add-cart:hover a {
-  color: #242424;
+  color: #fff;
 }
 .add-actions-link li.add-cart > a {
   color: #a4a4a4;
@@ -3146,9 +3142,9 @@ textarea:focus {
 .footer-newsletter .form-group .btn {
   position: absolute;
   right: 0;
-  background: #fed700;
+  background: #293a6c;
   border: none;
-  color: #242424;
+  color: #fff;
   height: 45px;
   text-transform: uppercase;
   font-size: 12px;
