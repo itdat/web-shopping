@@ -67,7 +67,7 @@
                         <div class="product_desc_info">
                           <div class="product-review">
                             <h5 class="manufacturer">
-                              <a href="product-details.html">{{brand}}</a>
+                              <a href="/brand/{{brand}}">{{brand}}</a>
                             </h5>
                             <div class="rating-box">
                               <ul class="rating">
@@ -847,19 +847,27 @@
           <div class="filter-sub-area pt-sm-10 pt-xs-10">
             <h5 class="filter-sub-titel">Giá</h5>
             <div class="categori-checkbox">
-              <form action="#">
+              <form id="price-form">
                 <ul>
-                  <li><input type="checkbox" name="product-categori"><a href="#">Đồ Họa (106)</a></li>
-                  <li><input type="checkbox" name="product-categori"><a href="#">Gaming (562)</a></li>
-                  <li><input type="checkbox" name="product-categori"><a href="#">Dựng phim (635)</a></li>
-                  <li><input type="checkbox" name="product-categori"><a href="#">Di động (135)</a></li>
-                  <li><input type="checkbox" name="product-categori"><a href="#">Lập trình (122)</a></li>
-                  <li><input type="checkbox" name="product-categori"><a href="#">Văn phòng (1022)</a></li>
+                  <li><input class="price" type="checkbox" name="price" value="Dưới 2 triệu"><a href="#"></a>Dưới 2
+                    triệu</a></li>
+                  <li><input class="price" type="checkbox" name="price" value="Từ 2 - 4 triệu"><a href="#">Từ 2 - 4
+                      triệu</a></li>
+                  <li><input class="price" type="checkbox" name="price" value="Từ 4 - 7 triệu"><a href="#">Từ 4 - 7
+                      triệu</a></li>
+                  <li><input class="price" type="checkbox" name="price" value="Từ 7 - 13 triệu"><a href="#">Từ 7 - 13
+                      triệu</a>
+                  </li>
+                  <li><input class="price" type="checkbox" name="price" value="Trên 13 triệu"><a href="#">Trên 13
+                      triệu</a>
+                  </li>
                 </ul>
               </form>
             </div>
           </div>
           <!-- filter-sub-area end -->
+
+          <a id="submit-filter" class="btn btn-primary btn-block mt-3 text-white">Lọc sản phẩm</a>
         </div>
         <!--sidebar-categores-box end  -->
       </div>

@@ -42,16 +42,16 @@ router.get("/", async function(req, res, next) {
 
 router.get("/index.html", async function(req, res, next) {
   const newProducts = await pool.query(
-    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE (SELECT DATEDIFF(\'day\', "dateRelease"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10'
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE (SELECT DATEDIFF(\'day\', "dateRelease"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10'
   );
   const highRatingProducts = await pool.query(
-    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE rating >= 4 ORDER BY rating DESC LIMIT 10'
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE rating >= 4 ORDER BY rating DESC LIMIT 10'
   );
   const popularProducts = await pool.query(
-    'SELECT pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating, "dateRelease" FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10'
+    'SELECT pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating, "dateRelease" FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.images, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10'
   );
   const appleBrandProducts = await pool.query(
-    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand = \'Apple\' ORDER BY "dateRelease" DESC LIMIT 10'
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand = \'Apple\' ORDER BY "dateRelease" DESC LIMIT 10'
   );
 
   const cardInfo = require("../card-info");
@@ -114,9 +114,60 @@ router.get("/login-register.html", function(req, res, next) {
 
 /* GET shop left sidebar page. */
 router.get("/shop-left-sidebar.html", async function(req, res, next) {
-  const allProducts = await pool.query(
-    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products'
-  );
+  const currentURL = new URL(req.protocol + "://" + req.get("host") + req.url);
+  const queryMap = {
+    "2000000": "(price::money::numeric::float8 < 2000000)",
+    "2000000-4000000":
+      "(price::money::numeric::float8 BETWEEN 2000000 AND 4000000)",
+    "4000000-7000000":
+      "(price::money::numeric::float8 BETWEEN 4000000 AND 7000000)",
+    "7000000-13000000":
+      "(price::money::numeric::float8 BETWEEN 7000000 AND 13000000)",
+    "13000000": "(price::money::numeric::float8 > 13000000)"
+  };
+
+  let brandSelected = currentURL.searchParams.getAll("brand");
+  let priceSelected = currentURL.searchParams.getAll("price");
+
+  console.log(brandSelected);
+  console.log(priceSelected.length);
+
+  let query =
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products';
+
+  let brandQuery = "",
+    priceQuery = "";
+  if (brandSelected.length != 0) {
+    brandQuery = "(";
+    brandSelected.forEach((b, i) => {
+      brandQuery = brandQuery + "(brand = '" + b + "')";
+      if (i != brandSelected.length - 1) {
+        brandQuery += " OR ";
+      } else {
+        brandQuery += ")";
+      }
+    });
+  }
+
+  if (priceSelected.length != 0) {
+    priceQuery = "(";
+    priceSelected.forEach((b, i) => {
+      priceQuery = priceQuery + queryMap[b];
+      if (i != priceSelected.length - 1) {
+        priceQuery += " OR ";
+      } else {
+        priceQuery += ")";
+      }
+    });
+  }
+
+  if (brandQuery !== "" || priceQuery !== "") query += " WHERE ";
+  query += brandQuery;
+  if (brandQuery !== "" && priceQuery !== "") query += " AND ";
+  query += priceQuery;
+  console.log(query);
+
+  const allProducts = await pool.query(query);
 
   const cardInfo = require("../card-info");
 
@@ -157,7 +208,7 @@ router.get("/single-product-:id", async function(req, res, next) {
   );
 
   const relateProducts = await pool.query(
-    'SELECT name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand = \'' +
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand = \'' +
       productDetails.rows[0].brand +
       "'"
   );
