@@ -130,6 +130,26 @@ router.get("/shop-left-sidebar.html", async function(req, res, next) {
   });
 });
 
+/* GET BY BRAND */
+router.get("/brand/:brand", async function(req, res, next) {
+  const allProducts = await pool.query(
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products WHERE brand =\'' +
+      req.params.brand +
+      "'"
+  );
+
+  const cardInfo = require("../card-info");
+
+  cardInfo.getCardInfo(allProducts);
+
+  console.log(allProducts.rows);
+  res.render("shop-left-sidebar", {
+    title: "Danh sách sản phẩm",
+    layout: "layout",
+    allProducts: allProducts.rows
+  });
+});
+
 /* GET single product page. */
 router.get("/single-product-:id", async function(req, res, next) {
   const productDetails = await pool.query(
