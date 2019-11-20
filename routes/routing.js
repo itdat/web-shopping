@@ -113,7 +113,7 @@ router.get("/login-register.html", function(req, res, next) {
 });
 
 /* GET shop left sidebar page. */
-router.get("/shop-left-sidebar.html", async function(req, res, next) {
+router.get("/products", async function(req, res, next) {
   const currentURL = new URL(req.protocol + "://" + req.get("host") + req.url);
   const queryMap = {
     "2000000": "(price::money::numeric::float8 < 2000000)",
