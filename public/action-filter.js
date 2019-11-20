@@ -45,7 +45,9 @@ $(document).ready(function() {
     console.log(url);
 
     history.pushState({ url: url }, "", url);
-    $("#productField").load(url + " #productField > *");
+    $("#productField").load(url + " #productField > *", function() {
+      location.hash = "#productField";
+    });
     let loading = `<h1 class="container text-muted p-5" style="height: 50vh;">Filtering...</h1>`;
     $("#productField").html(loading);
   }
