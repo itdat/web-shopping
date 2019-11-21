@@ -133,7 +133,7 @@ router.get("/products", async function(req, res, next) {
   console.log(priceSelected.length);
 
   let query =
-    'SELECT id, name, brand, price, promote, images, rating, "dateRelease" FROM products';
+    'SELECT id, name, brand, price, promote, images, rating, "dateRelease", description FROM products';
 
   let brandQuery = "",
     priceQuery = "";

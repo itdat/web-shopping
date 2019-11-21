@@ -1,57 +1,61 @@
-$(document).ready(function() {
-  // Initialized
-  let brandSelected = [];
-  let priceSelected = [];
+// Initialized
+let brandSelected = [];
+let priceSelected = [];
 
-  let invertMap = {
-    "2000000": "Dưới 2 triệu",
-    "2000000-4000000": "Từ 2 - 4 triệu",
-    "4000000-7000000": "Từ 4 - 7 triệu",
-    "7000000-13000000": "Từ 7 - 13 triệu",
-    "13000000": "Trên 13 triệu"
-  };
+let invertMap = {
+  "2000000": "Dưới 2 triệu",
+  "2000000-4000000": "Từ 2 - 4 triệu",
+  "4000000-7000000": "Từ 4 - 7 triệu",
+  "7000000-13000000": "Từ 7 - 13 triệu",
+  "13000000": "Trên 13 triệu"
+};
 
-  function updateFilterData() {
-    let url = "/products";
-    let brandParams = [];
-    for (let i = 0; i < brandSelected.length; i++) {
-      let pair = ["brand", brandSelected[i]];
-      brandParams.push(pair);
-    }
-
-    brandParams = new URLSearchParams(brandParams).toString();
-
-    let map = {
-      "Dưới 2 triệu": "2000000",
-      "Từ 2 - 4 triệu": "2000000-4000000",
-      "Từ 4 - 7 triệu": "4000000-7000000",
-      "Từ 7 - 13 triệu": "7000000-13000000",
-      "Trên 13 triệu": "13000000"
-    };
-
-    let priceParams = [];
-    for (let i = 0; i < priceSelected.length; i++) {
-      let pair = ["price", map[priceSelected[i]]];
-      priceParams.push(pair);
-    }
-
-    priceParams = new URLSearchParams(priceParams).toString();
-
-    if (brandParams !== "" || priceParams !== "") url = url + "?";
-    url = url + brandParams;
-    if (priceParams !== "") url = url + "&";
-    url = url + priceParams;
-
-    console.log(url);
-
-    history.pushState({ url: url }, "", url);
-    $("#productField").load(url + " #productField > *", function() {
-      location.hash = "#productField";
-    });
-    let loading = `<h1 class="container text-muted p-5" style="height: 50vh;">Filtering...</h1>`;
-    $("#productField").html(loading);
+function updateFilterData() {
+  let url = "/products";
+  let brandParams = [];
+  for (let i = 0; i < brandSelected.length; i++) {
+    let pair = ["brand", brandSelected[i]];
+    brandParams.push(pair);
   }
 
+  brandParams = new URLSearchParams(brandParams).toString();
+
+  let map = {
+    "Dưới 2 triệu": "2000000",
+    "Từ 2 - 4 triệu": "2000000-4000000",
+    "Từ 4 - 7 triệu": "4000000-7000000",
+    "Từ 7 - 13 triệu": "7000000-13000000",
+    "Trên 13 triệu": "13000000"
+  };
+
+  let priceParams = [];
+  for (let i = 0; i < priceSelected.length; i++) {
+    let pair = ["price", map[priceSelected[i]]];
+    priceParams.push(pair);
+  }
+
+  priceParams = new URLSearchParams(priceParams).toString();
+
+  if (brandParams !== "" || priceParams !== "") url = url + "?";
+  url = url + brandParams;
+  if (priceParams !== "") url = url + "&";
+  url = url + priceParams;
+
+  console.log(url);
+
+  history.pushState({ url: url }, "", url);
+  $("#productFieldGrid").load(url + " #productFieldGrid > *", function() {
+    showProducts("#productFieldGrid");
+  });
+  $("#productFieldList").load(url + " #productFieldList > *", function() {
+    showProducts("#productFieldList");
+  });
+  let loading = `<h1 class="container text-muted p-5" style="height: 50vh;">Đang lọc sản phẩm...</h1>`;
+  $("#productFieldGrid").html(loading);
+  $("#productFieldList").html(loading);
+}
+
+$(document).ready(function() {
   // INIT CURRENT FILTER STATE INTERFACE WHEN PAGE RELOAD
   const currentURL = new URL(window.location.href.toString()); // Get current URL after page reloaded
 
@@ -131,6 +135,9 @@ $(document).ready(function() {
     });
   });
 
+  showProducts("#productFieldGrid");
+  showProducts("#productFieldList");
+
   //////////////////////////////////////////////////////////////////
 
   $("#brand-form input[type=checkbox]").on("change", function() {
@@ -170,7 +177,6 @@ $(document).ready(function() {
     }
   });
 
-  // PRICE
   $("#price-form input[type=checkbox]").on("change", function() {
     let price = $(this).val();
     if ($(this).prop("checked")) {
@@ -206,44 +212,5 @@ $(document).ready(function() {
       priceSelected = priceSelected.filter(e => e !== price);
       updateFilterData();
     }
-  });
-
-  //
-  $("#submit-filter").on("click", function() {
-    let url = "/products";
-    let brandParams = [];
-    for (let i = 0; i < brandSelected.length; i++) {
-      let pair = ["brand", brandSelected[i]];
-      brandParams.push(pair);
-    }
-
-    brandParams = new URLSearchParams(brandParams).toString();
-
-    let map = {
-      "Dưới 2 triệu": "2000000",
-      "Từ 2 - 4 triệu": "2000000-4000000",
-      "Từ 4 - 7 triệu": "4000000-7000000",
-      "Từ 7 - 13 triệu": "7000000-13000000",
-      "Trên 13 triệu": "13000000"
-    };
-
-    let priceParams = [];
-    for (let i = 0; i < priceSelected.length; i++) {
-      let pair = ["price", map[priceSelected[i]]];
-      priceParams.push(pair);
-    }
-
-    priceParams = new URLSearchParams(priceParams).toString();
-
-    if (brandParams !== "" || priceParams !== "") url = url + "?";
-    url = url + brandParams;
-    if (priceParams !== "") url = url + "&";
-    url = url + priceParams;
-
-    console.log(url);
-
-    $("#productField").load(url + " #productField > *");
-
-    // window.open(url, "_self");
   });
 });

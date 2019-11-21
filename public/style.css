@@ -1464,7 +1464,7 @@ textarea:focus {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
 }
 #scrollUp:hover {
-  background: #fed700 none repeat scroll 0 0;
+  background: #293a6c none repeat scroll 0 0;
 }
 #scrollUp i {
   color: #ffffff;
@@ -2675,6 +2675,7 @@ textarea:focus {
 }
 .product-image {
   position: relative;
+  padding: 2rem;
 }
 .section-title-3 > h2 {
   background: #ffffff none repeat scroll 0 0;
@@ -5701,3 +5702,8 @@ span.required {
 /*----------------------------------------------------------------------------------------------------*/
 /*------------------------------------------> The End <-----------------------------------------------*/
 /*----------------------------------------------------------------------------------------------------*/
+
+
+.item-hide {
+  display: none;
+}
