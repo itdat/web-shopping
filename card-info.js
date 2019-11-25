@@ -20,7 +20,7 @@ exports.getCardInfo = function(products) {
 
   // Image
   products.rows.map(product => {
-    product.images = product.images.replace("*", "1");
+    product.images = product.path + "-1.jpg";
   });
 
   // Rating

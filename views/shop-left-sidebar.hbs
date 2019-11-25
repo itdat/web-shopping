@@ -100,6 +100,11 @@
                     <!-- single-product-wrap end -->
                   </div>
                   {{/each}}
+                  {{#unless allProducts}}
+                  <div class="container">
+                    <p class="pt-4">Không tìm thấy kết quả</p>
+                  </div>
+                  {{/unless}}
                 </div>
               </div>
             </div>
@@ -157,31 +162,17 @@
                     </div>
                   </div>
                   {{/each}}
+                  {{#unless allProducts}}
+                  <div class="container">
+                    <p class="pt-4">Không tìm thấy kết quả</p>
+                  </div>
+                  {{/unless}}
                 </div>
               </div>
             </div>
             <div>
               <button id="view-more-button" class="btn btn-block btn-outline-success d-none mt-100">Xem thêm</button>
             </div>
-            {{!-- <div class="paginatoin-area">
-              <div class="row">
-                <div class="col-lg-6 col-md-6 pt-xs-15">
-                  <p>Hiển thị kết quả từ 1 đến 12 trên 15</p>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                  <ul class="pagination-box pt-xs-20 pb-xs-15">
-                    <li><a href="#" class="Previous"><i class="fa fa-chevron-left"></i> Trước</a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li>
-                      <a href="#" class="Next"> Kế tiếp <i class="fa fa-chevron-right"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div> --}}
           </div>
         </div>
         <!-- shop-products-wrapper end -->

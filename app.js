@@ -23,14 +23,13 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", routing);
 
-// catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
 app.use(function(req, res, next) {
   res.status(404);
-  res.render("404", { title: "404" });
+  res.render("error", {
+    code: 404,
+    title: "Không tìm thấy trang",
+    details: "Trang bạn yêu cầu hiện không còn khả dụng!"
+  });
 });
 
 // error handler
