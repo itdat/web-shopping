@@ -41,8 +41,6 @@ function updateFilterData() {
   if (priceParams !== "") url = url + "&";
   url = url + priceParams;
 
-  console.log(url);
-
   history.pushState({ url: url }, "", url);
   $("#productFieldGrid").load(url + " #productFieldGrid > *", function() {
     showProducts("#productFieldGrid");
@@ -50,7 +48,8 @@ function updateFilterData() {
   $("#productFieldList").load(url + " #productFieldList > *", function() {
     showProducts("#productFieldList");
   });
-  let loading = `<h1 class="container text-muted p-5" style="height: 50vh;">Đang lọc sản phẩm...</h1>`;
+  let loading = `<p class="container p-5" style="height: 50vh;">Đang lọc sản phẩm...</p>`;
+  $("#view-more-button").addClass("d-none");
   $("#productFieldGrid").html(loading);
   $("#productFieldList").html(loading);
 }

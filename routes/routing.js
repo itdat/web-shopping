@@ -1,13 +1,9 @@
 var express = require("express");
+const pool = require("../models/db-config");
+const cardInfo = require("../models/card-info");
+const searchParams = require("../models/search-params");
+
 var router = express.Router();
-
-const pool = require("../db-config");
-const cardInfo = require("../card-info");
-const searchParams = require("../search-params");
-
-function formatNumber(num) {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
-}
 
 /* GET home page. */
 router.get("/", async function(req, res, next) {
@@ -93,8 +89,6 @@ router.get("/products/:path", async function(req, res, next) {
       "'"
   );
 
-  const cardInfo = require("../card-info");
-
   cardInfo.getCardInfo(relateProducts);
   cardInfo.getCardInfo(productDetails);
 
@@ -145,32 +139,6 @@ router.get("/faq.html", function(req, res, next) {
 /* GET login/register page. */
 router.get("/login-register.html", function(req, res, next) {
   res.render("login-register", { title: "Đăng nhập / Đăng ký" });
-});
-
-/* GET single product page. */
-router.get("/single-product-:id", async function(req, res, next) {
-  const productDetails = await pool.query(
-    "SELECT * FROM products WHERE id = " + req.params.id
-  );
-
-  const relateProducts = await pool.query(
-    'SELECT id, name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE brand = \'' +
-      productDetails.rows[0].brand +
-      "'"
-  );
-
-  const cardInfo = require("../card-info");
-
-  cardInfo.getCardInfo(relateProducts);
-  cardInfo.getCardInfo(productDetails);
-
-  console.log(productDetails.rows);
-  res.render("single-product", {
-    title: productDetails.rows[0].name,
-    layout: "layout",
-    productDetails: productDetails.rows[0],
-    relateProducts: relateProducts.rows
-  });
 });
 
 /* GET compare page. */

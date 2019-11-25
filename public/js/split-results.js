@@ -1,6 +1,5 @@
 function showProducts(parent) {
   $(parent + " .item-hide:lt(15)").removeClass("item-hide");
-  console.log("Left products: ", $(parent + " .item-hide").length);
   if ($(parent + " .item-hide").length > 0) {
     $("#view-more-button").removeClass("d-none");
     $("#view-more-button").removeAttr("disabled");

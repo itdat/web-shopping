@@ -56,7 +56,7 @@
                     <!-- single-product-wrap start -->
                     <div class="single-product-wrap">
                       <div class="product-image">
-                        <a href="single-product-{{id}}">
+                        <a href="/products/{{path}}">
                           <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
                         </a>
                         {{#if new}}
@@ -67,7 +67,7 @@
                         <div class="product_desc_info">
                           <div class="product-review">
                             <h5 class="manufacturer">
-                              <a href="/brand/{{brand}}">{{brand}}</a>
+                              <a href="/products?brand={{brand}}">{{brand}}</a>
                             </h5>
                             <div class="rating-box">
                               <ul class="rating">
@@ -79,7 +79,7 @@
                               </ul>
                             </div>
                           </div>
-                          <h4><a class="product_name" href="single-product-{{id}}">{{name}}</a></h4>
+                          <h4><a class="product_name" href="/products/{{path}}">{{name}}</a></h4>
                           <div class="price-box">
                             <span class="new-price new-price-2">{{newPrice}}₫</span>
                             <span class="old-price">{{price}}₫</span>
@@ -89,7 +89,7 @@
                         <div class="add-actions">
                           <ul class="add-actions-link">
                             <li class="add-cart active"><a href="#">Thêm vào giỏ</a></li>
-                            <li><a class="links-details" href="single-product-{{id}}"><i class="fa fa-heart-o"></i></a>
+                            <li><a class="links-details" href="/products/{{path}}"><i class="fa fa-heart-o"></i></a>
                             </li>
                             <li><a class="quick-view" data-toggle="modal" data-target="#exampleModalCenter" href="#"><i
                                   class="fa fa-eye"></i></a></li>
@@ -116,7 +116,7 @@
                   <div class="item-hide row product-layout-list">
                     <div class="col-lg-3 col-md-5 ">
                       <div class="product-image">
-                        <a href="single-product-{{id}}">
+                        <a href="/products/{{path}}">
                           <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
                         </a>
                         {{#if new}}
@@ -129,7 +129,7 @@
                         <div class="product_desc_info">
                           <div class="product-review">
                             <h5 class="manufacturer">
-                              <a href="/brand/{{brand}}">{{brand}}</a>
+                              <a href="/products?brand={{brand}}">{{brand}}</a>
                             </h5>
                             <div class="rating-box">
                               <ul class="rating">
@@ -141,7 +141,7 @@
                               </ul>
                             </div>
                           </div>
-                          <h4><a class="product_name" href="single-product-{{id}}">{{name}}</a></h4>
+                          <h4><a class="product_name" href="/products/{{path}}">{{name}}</a></h4>
                           <div class="price-box">
                             <span class="new-price">{{newPrice}}</span>
                           </div>
