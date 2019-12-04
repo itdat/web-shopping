@@ -1,0 +1,65 @@
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12 container">
+        <form action="/register" method="POST">
+          <div class="login-form">
+            <h4 class="login-title">Đăng ký</h4>
+            <div class="row">
+              <div class="col-md-6 col-12 mb-20">
+                <label>Tên đệm</label>
+                <input class="mb-0" type="text" placeholder="Tên đệm">
+              </div>
+              <div class="col-md-6 col-12 mb-20">
+                <label>Tên</label>
+                <input class="mb-0" type="text" placeholder="Tên">
+              </div>
+              <div class="col-md-12 mb-20">
+                <label>Địa chỉ Email*</label>
+                <input name="email" class="mb-0" type="email" placeholder="Địa chỉ Email">
+              </div>
+              <div class="col-md-6 mb-20">
+                <label>Mật khẩu</label>
+                <input id="password" name="password" class="mb-0" type="password" placeholder="Mật khẩu">
+              </div>
+              <div class="col-md-6 mb-20">
+                <label>Xác nhận mật khẩu</label>
+                <input id="confirm-password" name="confirm-password" class="mb-0" type="password"
+                  placeholder="Xác nhận mật khẩu">
+              </div>
+              {{#if error}}
+              <div class="col-md-12">
+                <p class="text-danger font-italic">{{error}}</p>
+              </div>
+              {{/if}}
+              <div class="col-12">
+                <button class="register-button mt-0">Đăng ký</button>
+              </div>
+              <div class="col-12 text-muted pt-3">
+                <span>Đã có tài khoản? </span><a href="/login">Đăng nhập</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var password = document.getElementById("password")
+    , confirm_password = document.getElementById("confirm-password");
+
+  function validatePassword() {
+    if (password.value != confirm_password.value) {
+      confirm_password.setCustomValidity("Mật khẩu xác nhận không trùng khớp");
+    } else {
+      confirm_password.setCustomValidity('');
+    }
+  }
+
+  password.onchange = validatePassword;
+  confirm_password.onkeyup = validatePassword;
+</script>
+<!-- Login Content Area End Here -->

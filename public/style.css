@@ -84,7 +84,7 @@ a {
   transition: 0.3s ease-in-out;
 }
 a:hover {
-  color: #fed700;
+  color: #293a6c;
 }
 .img {
   max-width: 100%;
@@ -97,7 +97,7 @@ a:hover {
 }
 a:focus,
 a:hover {
-  color: #fed700;
+  color: #ccdb00;
   text-decoration: none;
 }
 a,
@@ -1511,6 +1511,7 @@ textarea:focus {
   display: flex;
   align-items: center;
   align-self: stretch;
+  color: #a5a5a5;
 }
 .ht-menu > li::after {
   content: "";
@@ -4261,7 +4262,7 @@ thead {
   transition: all 0.3s ease-in-out;
 }
 .register-button:hover {
-  background: #fed700;
+  background: #293a6c;
 }
 /*----------------------------------------*/
 /* 	6.6 Li's Shopping Cart
