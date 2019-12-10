@@ -10,15 +10,16 @@ let invertMap = {
   "13000000": "Trên 13 triệu"
 };
 
-function updateFilterData() {
-  let url = "/products";
-  let brandParams = [];
-  for (let i = 0; i < brandSelected.length; i++) {
-    let pair = ["brand", brandSelected[i]];
-    brandParams.push(pair);
-  }
+function updateFilteringData() {
+  let url = new URL(window.location.href);
 
-  brandParams = new URLSearchParams(brandParams).toString();
+  let searchParams = new URLSearchParams(url.search);
+  searchParams.delete("brand");
+  searchParams.delete("price");
+
+  for (let i = 0; i < brandSelected.length; i++) {
+    searchParams.append("brand", brandSelected[i]);
+  }
 
   let map = {
     "Dưới 2 triệu": "2000000",
@@ -28,28 +29,21 @@ function updateFilterData() {
     "Trên 13 triệu": "13000000"
   };
 
-  let priceParams = [];
   for (let i = 0; i < priceSelected.length; i++) {
-    let pair = ["price", map[priceSelected[i]]];
-    priceParams.push(pair);
+    searchParams.append("price", map[priceSelected[i]]);
   }
 
-  priceParams = new URLSearchParams(priceParams).toString();
-
-  if (brandParams !== "" || priceParams !== "") url = url + "?";
-  url = url + brandParams;
-  if (priceParams !== "") url = url + "&";
-  url = url + priceParams;
+  url.search = searchParams.toString();
+  url = url.toString();
 
   history.pushState({ url: url }, "", url);
   $("#productFieldGrid").load(url + " #productFieldGrid > *", function() {
-    showProducts("#productFieldGrid");
+    paging("#productFieldGrid", "#pagination-grid");
   });
   $("#productFieldList").load(url + " #productFieldList > *", function() {
-    showProducts("#productFieldList");
+    paging("#productFieldList", "#pagination-list");
   });
-  let loading = `<p class="container p-5" style="height: 50vh;">Đang lọc sản phẩm...</p>`;
-  $("#view-more-button").addClass("d-none");
+  let loading = `<p class="container p-5 text-center" style="height: 50vh;">Đang lọc sản phẩm...</p>`;
   $("#productFieldGrid").html(loading);
   $("#productFieldList").html(loading);
 }
@@ -87,7 +81,7 @@ $(document).ready(function() {
         button.remove();
 
         brandSelected = brandSelected.filter(e => e !== button.textContent);
-        updateFilterData();
+        updateFilteringData();
 
         const checkboxes = document.querySelectorAll("input.brand");
         checkboxes.forEach(checkbox => {
@@ -122,7 +116,7 @@ $(document).ready(function() {
         button.remove();
 
         priceSelected = priceSelected.filter(e => e !== button.textContent);
-        updateFilterData();
+        updateFilteringData();
 
         const checkboxes = document.querySelectorAll("input.price");
         checkboxes.forEach(checkbox => {
@@ -134,8 +128,10 @@ $(document).ready(function() {
     });
   });
 
-  showProducts("#productFieldGrid");
-  showProducts("#productFieldList");
+  paging("#productFieldGrid", "#pagination-grid");
+  paging("#productFieldList", "#pagination-list");
+
+  const paginationGrid = $("#pagination-grid");
 
   //////////////////////////////////////////////////////////////////
 
@@ -158,7 +154,7 @@ $(document).ready(function() {
           button.remove();
 
           brandSelected = brandSelected.filter(e => e !== button.textContent);
-          updateFilterData();
+          updateFilteringData();
 
           const checkboxes = document.querySelectorAll("input.brand");
           checkboxes.forEach(checkbox => {
@@ -168,11 +164,11 @@ $(document).ready(function() {
           });
         });
       });
-      updateFilterData();
+      updateFilteringData();
     } else {
       $('.label-filter-wrap button:contains("' + brand + '")').remove();
       brandSelected = brandSelected.filter(e => e !== brand);
-      updateFilterData();
+      updateFilteringData();
     }
   });
 
@@ -195,7 +191,7 @@ $(document).ready(function() {
           button.remove();
 
           priceSelected = priceSelected.filter(e => e !== button.textContent);
-          updateFilterData();
+          updateFilteringData();
 
           const checkboxes = document.querySelectorAll("input.price");
           checkboxes.forEach(checkbox => {
@@ -205,11 +201,13 @@ $(document).ready(function() {
           });
         });
       });
-      updateFilterData();
+      updateFilteringData();
     } else {
       $('.label-filter-wrap button:contains("' + price + '")').remove();
       priceSelected = priceSelected.filter(e => e !== price);
-      updateFilterData();
+      updateFilteringData();
     }
   });
+
+  /////////////////////////////////////////////////////////////////
 });

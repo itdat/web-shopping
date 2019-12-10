@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var routing = require("./routes/routing");
+var routing = require("./routing");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -50,14 +50,18 @@ app.use(function(req, res, next) {
 });
 
 // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get("env") === "development" ? err : {};
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render("error");
-// });
+  // render the error page
+  res.status(err.status || 500);
+  res.render("error", {
+    code: 500,
+    title: "Lỗi truy xuất dữ liệu",
+    details: "Có lỗi xảy ra ở server nên tạm thời yêu cầu không được phản hồi!"
+  });
+});
 
 module.exports = app;

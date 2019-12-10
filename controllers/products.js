@@ -6,10 +6,14 @@ router.get("/", async (req, res, next) => {
   try {
     // Get current URL
     const currentURL = req.protocol + "://" + req.get("host") + req.url;
-    const allProducts = await products.getFilteringProducts(currentURL, [
-      "brand",
-      "price"
-    ]);
+
+    const query = await products.queryBuilder(
+      currentURL,
+      ["brand", "price"],
+      true
+    );
+
+    const allProducts = await products.query(query);
 
     res.status(200);
     return res.render("shop-left-sidebar", {

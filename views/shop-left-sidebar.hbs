@@ -24,21 +24,20 @@
               <!-- shop-item-filter-list end -->
             </div>
             <div class="toolbar-amount">
-              <span>Hiển thị kết quả từ 1 đến 12 trên 15</span>
+              <span>Hiển thị kết quả từ <span class="begin">0</span> đến <span class="end">0</span> trên <span
+                  class="total">0</span></span>
             </div>
           </div>
           <!-- product-select-box start -->
           <div class="product-select-box">
             <div class="product-short">
               <p>Sắp xếp theo:</p>
-              <select class="nice-select">
-                <option value="trending">Liên quan</option>
-                <option value="sales">Tên (A - Z)</option>
-                <option value="sales">Tên (Z - A)</option>
-                <option value="rating">Giá (Thấp &gt; Cao)</option>
-                <option value="date">Đánh giá (Thấp nhất)</option>
-                <option value="price-asc">Mẫu (A - Z)</option>
-                <option value="price-asc">Mẫu (Z - A)</option>
+              <select id="sort-products" class="nice-select">
+                <option value="date-desc" selected="selected">Ngày ra mắt (Mới nhất)</option>
+                <option value="name-asc">Tên (A &rarr; Z)</option>
+                <option value="name-desc">Tên (Z &rarr; A)</option>
+                <option value="price-asc">Giá (Thấp &rarr; Cao)</option>
+                <option value="rating-desc">Đánh giá (Cao &rarr; Thấp)</option>
               </select>
             </div>
           </div>
@@ -52,7 +51,7 @@
               <div class="product-area shop-product-area">
                 <div id="productFieldGrid" class="row">
                   {{#each allProducts}}
-                  <div class="item-hide col-lg-4 col-md-4 col-sm-6 mt-40">
+                  <div class="col-lg-4 col-md-4 col-sm-6 mt-40">
                     <!-- single-product-wrap start -->
                     <div class="single-product-wrap">
                       <div class="product-image">
@@ -102,18 +101,31 @@
                   {{/each}}
                   {{#unless allProducts}}
                   <div class="container">
-                    <p class="pt-4">Không tìm thấy kết quả</p>
+                    <p class="pt-4 text-center">Không tìm thấy kết quả</p>
                   </div>
                   {{/unless}}
                 </div>
               </div>
+              <!-- Pagination area -->
+              <div class="paginatoin-area">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                    <p>Hiển thị kết quả từ <span class="begin">0</span> đến <span class="end">0</span> trên <span
+                        class="total">0</span></p>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <div id="pagination-grid" class="pagination-box"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Pagination area -->
             </div>
 
             <div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
               <div class="row">
                 <div id="productFieldList" class="col">
                   {{#each allProducts}}
-                  <div class="item-hide row product-layout-list">
+                  <div class="row product-layout-list">
                     <div class="col-lg-3 col-md-5 ">
                       <div class="product-image">
                         <a href="/products/{{path}}">
@@ -164,15 +176,26 @@
                   {{/each}}
                   {{#unless allProducts}}
                   <div class="container">
-                    <p class="pt-4">Không tìm thấy kết quả</p>
+                    <p class="pt-4 text-center">Không tìm thấy kết quả</p>
                   </div>
                   {{/unless}}
                 </div>
               </div>
+              <!-- Pagination area -->
+              <div class="paginatoin-area">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6">
+                    <p>Hiển thị kết quả từ <span class="begin">...</span> đến <span class="end">...</span> trên <span
+                        class="total">...</span></p>
+                  </div>
+                  <div class="col-lg-6 col-md-6">
+                    <div id="pagination-list" class="pagination-box"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Pagination area -->
             </div>
-            <div>
-              <button id="view-more-button" class="btn btn-block btn-outline-success d-none mt-100">Xem thêm</button>
-            </div>
+
           </div>
         </div>
         <!-- shop-products-wrapper end -->
@@ -245,33 +268,50 @@
             <div class="categori-checkbox">
               <form id="brand-form">
                 <ul>
-                  <li><input class="brand" type="checkbox" name="brand" value="Apple"><a href="/brand/Apple">Apple
-                      (124)</a></li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Samsung"><a href="/brand/Samsung">Samsung
-                      (452)</a>
+                  <li>
+                    <input id="apple" class="brand" type="checkbox" name="brand" value="Apple">
+                    <label for="apple">Apple (124)</label>
                   </li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Asus"><a href="/brand/Asus">Asus
-                      (589)</a></li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Nokia"><a href="/brand/Nokia">Nokia
-                      (239)</a></li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Huawei"><a href="/brand/Huawei">Huawei
-                      (3239)</a>
+                  <li>
+                    <input id="samsung" class="brand" type="checkbox" name="brand" value="Samsung">
+                    <label for="samsung">Samsung (452)</label>
                   </li>
-                  <li><input class="brand" type="checkbox" name="brand" value="OPPO"><a href="/brand/OPPO">OPPO
-                      (3239)</a>
+                  <li>
+                    <input id="asus" class="brand" type="checkbox" name="brand" value="Asus">
+                    <label for="asus">Asus (589)</label>
                   </li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Sony"><a href="/brand/Sony">Sony
-                      (1320)</a></li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Lenovo"><a href="/brand/Lenovo">Lenovo
-                      (310)</a></li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Xiaomi"><a href="/brand/Xiaomi">Xiaomi
-                      (210)</a></li>
-                  <li><input class="brand" type="checkbox" name="brand" value="Realme"><a href="/brand/Realme">Realme
-                      (5410)</a>
+                  <li>
+                    <input id="nokia" class="brand" type="checkbox" name="brand" value="Nokia">
+                    <label for="nokia">Nokia (239)</label>
                   </li>
-                  <li><input class="brand" type="checkbox" name="brand" value="BlackBerry"><a
-                      href="/brand/BlackBerry">BlackBerry
-                      (130)</a></li>
+                  <li>
+                    <input id="huawei" class="brand" type="checkbox" name="brand" value="Huawei">
+                    <label for="huawei">Huawei (3489)</label>
+                  </li>
+                  <li>
+                    <input id="oppo" class="brand" type="checkbox" name="brand" value="OPPO">
+                    <label for="oppo">OPPO (453)</label>
+                  </li>
+                  <li>
+                    <input id="sony" class="brand" type="checkbox" name="brand" value="Sony">
+                    <label for="sony">Sony (123)</label>
+                  </li>
+                  <li>
+                    <input id="lenovo" class="brand" type="checkbox" name="brand" value="Lenovo">
+                    <label for="lenovo">Lenovo (909)</label>
+                  </li>
+                  <li>
+                    <input id="xiaomi" class="brand" type="checkbox" name="brand" value="Xiaomi">
+                    <label for="xiaomi">Xiaomi (5989)</label>
+                  </li>
+                  <li>
+                    <input id="realme" class="brand" type="checkbox" name="brand" value="Realme">
+                    <label for="realme">Realme (2349)</label>
+                  </li>
+                  <li>
+                    <input id="blackberry" class="brand" type="checkbox" name="brand" value="BlackBerry">
+                    <label for="blackberry">BlackBerry (589)</label>
+                  </li>
                 </ul>
               </form>
             </div>
@@ -283,25 +323,31 @@
             <div class="categori-checkbox">
               <form id="price-form">
                 <ul>
-                  <li><input class="price" type="checkbox" name="price" value="Dưới 2 triệu"><a href="#">Dưới 2
-                      triệu</a></li>
-                  <li><input class="price" type="checkbox" name="price" value="Từ 2 - 4 triệu"><a href="#">Từ 2 - 4
-                      triệu</a></li>
-                  <li><input class="price" type="checkbox" name="price" value="Từ 4 - 7 triệu"><a href="#">Từ 4 - 7
-                      triệu</a></li>
-                  <li><input class="price" type="checkbox" name="price" value="Từ 7 - 13 triệu"><a href="#">Từ 7 - 13
-                      triệu</a>
+                  <li>
+                    <input id="lt2" class="price" type="checkbox" name="price" value="Dưới 2 triệu">
+                    <label for="lt2">Dưới 2 triệu</label>
                   </li>
-                  <li><input class="price" type="checkbox" name="price" value="Trên 13 triệu"><a href="#">Trên 13
-                      triệu</a>
+                  <li>
+                    <input id="f2t4" class="price" type="checkbox" name="price" value="Từ 2 - 4 triệu">
+                    <label for="f2t4">Từ 2 - 4 triệu</label>
+                  </li>
+                  <li>
+                    <input id="f4t7" class="price" type="checkbox" name="price" value="Từ 4 - 7 triệu">
+                    <label for="f4t7">Từ 4 - 7 triệu</label>
+                  </li>
+                  <li>
+                    <input id="f7t13" class="price" type="checkbox" name="price" value="Từ 7 - 13 triệu">
+                    <label for="f7t13">Từ 7 - 13 triệu</label>
+                  </li>
+                  <li>
+                    <input id="gt13" class="price" type="checkbox" name="price" value="Trên 13 triệu">
+                    <label for="gt13">Trên 13 triệu</label>
                   </li>
                 </ul>
               </form>
             </div>
           </div>
           <!-- filter-sub-area end -->
-
-          {{!-- <a id="submit-filter" class="btn btn-primary btn-block mt-3 text-white">Lọc sản phẩm</a> --}}
         </div>
         <!--sidebar-categores-box end  -->
       </div>

@@ -14,6 +14,17 @@ const queryPriceMap = {
   "13000000": "(price::money::numeric::float8 > 13000000)"
 };
 
+const querySortMap = {
+  "name-asc": "name ASC",
+  "name-desc": "name DESC",
+  "price-asc": "price ASC",
+  "price-desc": "price DESC",
+  "rating-asc": "rating ASC",
+  "rating-desc": "rating DESC",
+  "date-asc": '"dateRelease" ASC',
+  "date-desc": '"dateRelease" DESC'
+};
+
 // Database config
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -77,17 +88,11 @@ function standardizedData(products) {
   });
 }
 
-// Get products from database with filter params
-// urlWithParams (string): i.e https://example.com/products?brand=Apple&price=13000000
-// filteringParams (array of string): which params that we focus on filtering (in case urlWithParams included the params that we didn't handle)
-const getFilteringProducts = async (urlWithParams, filteringParams) => {
-  // Create an URL object from the URL in string type (URL object supports searchParams method to get params from URL)
+const queryBuilder = async (urlWithParams, filteringParams, useSortParam) => {
   const url = new URL(urlWithParams);
 
   let query =
-    'SELECT id, name, brand, price, promote, path, rating, "dateRelease", description FROM products';
-
-  let haveParam = false;
+    'SELECT id, name, brand, price, promote, path, rating, "dateRelease", description FROM products WHERE 1 = 1';
 
   for (let i = 0; i < filteringParams.length; i++) {
     let param = url.searchParams.getAll(filteringParams[i]);
@@ -108,14 +113,22 @@ const getFilteringProducts = async (urlWithParams, filteringParams) => {
     });
 
     if (paramQuery !== "") {
-      if (!haveParam) {
-        query = query + " WHERE (" + paramQuery + ")";
-        haveParam = true;
-      } else {
-        query = query + " AND (" + paramQuery + ")";
-      }
+      query = query + " AND (" + paramQuery + ")";
     }
   }
+
+  if (useSortParam) {
+    if (url.searchParams.has("sort")) {
+      query += " ORDER BY " + querySortMap[url.searchParams.get("sort")];
+    } else {
+      query += ' ORDER BY "dateRelease" DESC';
+    }
+  }
+
+  return query;
+};
+
+const query = async query => {
   const data = await pool.query(query);
   standardizedData(data);
   return data.rows;
@@ -177,6 +190,7 @@ module.exports.getTop10NewProducts = getTop10NewProducts;
 module.exports.getTop10BestSellerProducts = getTop10BestSellerProducts;
 module.exports.getTop10HighRatingProducts = getTop10HighRatingProducts;
 module.exports.getTop10AppleProducts = getTop10AppleProducts;
-module.exports.getFilteringProducts = getFilteringProducts;
+module.exports.query = query;
 module.exports.getProductDetails = getProductDetails;
 module.exports.getProductsByBrand = getProductsByBrand;
+module.exports.queryBuilder = queryBuilder;

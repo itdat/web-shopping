@@ -188,6 +188,7 @@ label {
   font-size: 15px;
   font-weight: 400;
   color: #626262;
+  margin-left: 15px;
 }
 *::-moz-selection {
   background: #4fc1f0;
@@ -245,7 +246,7 @@ span.tooltip-content {
 .nice-select .option:hover,
 .nice-select .option.focus,
 .nice-select .option.selected.focus {
-  background-color: #fed700;
+  background-color: #293a6c;
 }
 .nice-select .option:hover {
   color: #ffffff;
@@ -5279,6 +5280,7 @@ span.required {
 }
 .pagination-box {
   text-align: right;
+  float: right;
 }
 .pagination-box > li {
   display: inline-block;
