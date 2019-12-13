@@ -10,6 +10,7 @@ var bodyParser = require("body-parser");
 var flash = require("connect-flash");
 
 require("./configs/passport");
+
 app.use(
   session({
     secret: "secured_key",
@@ -23,7 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var routing = require("./routing");
+// Require routing
+const routing = require("./routing");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -32,13 +34,18 @@ app.set("view engine", "hbs");
 var hbs = require("hbs");
 hbs.registerPartials(__dirname + "/views/partials");
 
+require("./helper");
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", routing);
+const { getStateAuthenticated } = require("./controllers/authentication");
+
+// Routing
+app.use("/", getStateAuthenticated, routing);
 
 app.use(function(req, res, next) {
   res.status(404);

@@ -24,8 +24,7 @@
               <!-- shop-item-filter-list end -->
             </div>
             <div class="toolbar-amount">
-              <span>Hiển thị kết quả từ <span class="begin">0</span> đến <span class="end">0</span> trên <span
-                  class="total">0</span></span>
+              <span>Hiển thị kết quả từ {{startIndex}} đến {{endIndex}} trên {{totalItems}}</span>
             </div>
           </div>
           <!-- product-select-box start -->
@@ -70,11 +69,8 @@
                             </h5>
                             <div class="rating-box">
                               <ul class="rating">
-                                <li class="{{rating.[0]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[1]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[2]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[3]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[4]}}"><i class="fa fa-star"></i></li>
+                                {{#showRating rating}}
+                                {{/showRating}}
                               </ul>
                             </div>
                           </div>
@@ -106,19 +102,6 @@
                   {{/unless}}
                 </div>
               </div>
-              <!-- Pagination area -->
-              <div class="paginatoin-area">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6">
-                    <p>Hiển thị kết quả từ <span class="begin">0</span> đến <span class="end">0</span> trên <span
-                        class="total">0</span></p>
-                  </div>
-                  <div class="col-lg-6 col-md-6">
-                    <div id="pagination-grid" class="pagination-box"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- End Pagination area -->
             </div>
 
             <div id="list-view" class="tab-pane fade product-list-view" role="tabpanel">
@@ -145,11 +128,8 @@
                             </h5>
                             <div class="rating-box">
                               <ul class="rating">
-                                <li class="{{rating.[0]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[1]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[2]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[3]}}"><i class="fa fa-star"></i></li>
-                                <li class="{{rating.[4]}}"><i class="fa fa-star"></i></li>
+                                {{#showRating rating}}
+                                {{/showRating}}
                               </ul>
                             </div>
                           </div>
@@ -181,21 +161,29 @@
                   {{/unless}}
                 </div>
               </div>
-              <!-- Pagination area -->
-              <div class="paginatoin-area">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6">
-                    <p>Hiển thị kết quả từ <span class="begin">...</span> đến <span class="end">...</span> trên <span
-                        class="total">...</span></p>
-                  </div>
-                  <div class="col-lg-6 col-md-6">
-                    <div id="pagination-list" class="pagination-box"></div>
+            </div>
+
+            <!-- Pagination area -->
+            <div id="products-pagination" class="paginatoin-area mt-100">
+              <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <p>Hiển thị kết quả từ {{startIndex}} đến {{endIndex}} trên {{totalItems}}</p>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                  <div class="pagination-box">
+                    <div class="paginationjs">
+                      <div class="paginationjs-pages">
+                        <ul>
+                          {{#pagination pageCount currentPage pageRange path}}
+                          {{/pagination}}
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!-- End Pagination area -->
             </div>
-
+            <!-- End Pagination area -->
           </div>
         </div>
         <!-- shop-products-wrapper end -->
@@ -270,47 +258,47 @@
                 <ul>
                   <li>
                     <input id="apple" class="brand" type="checkbox" name="brand" value="Apple">
-                    <label for="apple">Apple (124)</label>
+                    <label for="apple">Apple ({{appleNumber}})</label>
                   </li>
                   <li>
                     <input id="samsung" class="brand" type="checkbox" name="brand" value="Samsung">
-                    <label for="samsung">Samsung (452)</label>
+                    <label for="samsung">Samsung ({{samsungNumber}})</label>
                   </li>
                   <li>
                     <input id="asus" class="brand" type="checkbox" name="brand" value="Asus">
-                    <label for="asus">Asus (589)</label>
+                    <label for="asus">Asus ({{asusNumber}})</label>
                   </li>
                   <li>
                     <input id="nokia" class="brand" type="checkbox" name="brand" value="Nokia">
-                    <label for="nokia">Nokia (239)</label>
+                    <label for="nokia">Nokia ({{nokiaNumber}})</label>
                   </li>
                   <li>
                     <input id="huawei" class="brand" type="checkbox" name="brand" value="Huawei">
-                    <label for="huawei">Huawei (3489)</label>
+                    <label for="huawei">Huawei ({{huaweiNumber}})</label>
                   </li>
                   <li>
                     <input id="oppo" class="brand" type="checkbox" name="brand" value="OPPO">
-                    <label for="oppo">OPPO (453)</label>
+                    <label for="oppo">OPPO ({{oppoNumber}})</label>
                   </li>
                   <li>
                     <input id="sony" class="brand" type="checkbox" name="brand" value="Sony">
-                    <label for="sony">Sony (123)</label>
+                    <label for="sony">Sony ({{sonyNumber}})</label>
                   </li>
                   <li>
                     <input id="lenovo" class="brand" type="checkbox" name="brand" value="Lenovo">
-                    <label for="lenovo">Lenovo (909)</label>
+                    <label for="lenovo">Lenovo ({{lenovoNumber}})</label>
                   </li>
                   <li>
                     <input id="xiaomi" class="brand" type="checkbox" name="brand" value="Xiaomi">
-                    <label for="xiaomi">Xiaomi (5989)</label>
+                    <label for="xiaomi">Xiaomi ({{xiaomiNumber}})</label>
                   </li>
                   <li>
                     <input id="realme" class="brand" type="checkbox" name="brand" value="Realme">
-                    <label for="realme">Realme (2349)</label>
+                    <label for="realme">Realme ({{realmeNumber}})</label>
                   </li>
                   <li>
                     <input id="blackberry" class="brand" type="checkbox" name="brand" value="BlackBerry">
-                    <label for="blackberry">BlackBerry (589)</label>
+                    <label for="blackberry">BlackBerry ({{blackberryNumber}})</label>
                   </li>
                 </ul>
               </form>

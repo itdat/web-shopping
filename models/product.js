@@ -1,9 +1,5 @@
-const { Pool } = require("pg");
-const { URL } = require("url");
-require("dotenv").config();
-
-// Define query value mapping with price param
-const queryPriceMap = {
+// Define query value mapping with params
+const priceQueryMap = {
   "2000000": "(price::money::numeric::float8 < 2000000)",
   "2000000-4000000":
     "(price::money::numeric::float8 BETWEEN 2000000 AND 4000000)",
@@ -14,7 +10,7 @@ const queryPriceMap = {
   "13000000": "(price::money::numeric::float8 > 13000000)"
 };
 
-const querySortMap = {
+const sortQueryMap = {
   "name-asc": "name ASC",
   "name-desc": "name DESC",
   "price-asc": "price ASC",
@@ -25,15 +21,8 @@ const querySortMap = {
   "date-desc": '"dateRelease" DESC'
 };
 
-// Database config
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  ssl: process.env.DB_SSL
-});
+// Get pool connection
+const pool = require("../configs/database");
 
 // Convert data type "number" in PostgreSQL to number in Javascript
 function formatNumber(num) {
@@ -62,19 +51,6 @@ function standardizedData(products) {
     product.images = product.path + "-1.jpg";
   });
 
-  // Rating
-  products.rows.map(product => {
-    let arr = [];
-    for (let i = 0; i < 5; i++) {
-      if (i < product.rating) {
-        arr.push("");
-      } else {
-        arr.push("no-star");
-      }
-    }
-    product.rating = arr;
-  });
-
   // New status
   products.rows.map(product => {
     let dateRelease = new Date(product.dateRelease.toString());
@@ -88,55 +64,8 @@ function standardizedData(products) {
   });
 }
 
-const queryBuilder = async (urlWithParams, filteringParams, useSortParam) => {
-  const url = new URL(urlWithParams);
-
-  let query =
-    'SELECT id, name, brand, price, promote, path, rating, "dateRelease", description FROM products WHERE 1 = 1';
-
-  for (let i = 0; i < filteringParams.length; i++) {
-    let param = url.searchParams.getAll(filteringParams[i]);
-    console.log(filteringParams[i] + " = " + param);
-    let paramQuery = "";
-
-    param.forEach((p, j) => {
-      let tmp = "";
-      if (filteringParams[i] === "price") {
-        tmp += queryPriceMap[p];
-      } else {
-        tmp = tmp + "(" + filteringParams[i] + " = '" + p + "')";
-      }
-      if (j != param.length - 1) {
-        tmp += " OR ";
-      }
-      paramQuery += tmp;
-    });
-
-    if (paramQuery !== "") {
-      query = query + " AND (" + paramQuery + ")";
-    }
-  }
-
-  if (useSortParam) {
-    if (url.searchParams.has("sort")) {
-      query += " ORDER BY " + querySortMap[url.searchParams.get("sort")];
-    } else {
-      query += ' ORDER BY "dateRelease" DESC';
-    }
-  }
-
-  return query;
-};
-
-const query = async query => {
-  const data = await pool.query(query);
-  standardizedData(data);
-  return data.rows;
-};
-
-// Products showing on landing page
-
-const getTop10NewProducts = async () => {
+// *** DATA SHOWING ON LANDING PAGE ***
+module.exports.getTop10NewProducts = async () => {
   const data = await pool.query(
     'SELECT name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE (SELECT DATEDIFF(\'day\', "dateRelease"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10'
   );
@@ -144,7 +73,7 @@ const getTop10NewProducts = async () => {
   return data.rows;
 };
 
-const getTop10BestSellerProducts = async () => {
+module.exports.getTop10BestSellerProducts = async () => {
   const data = await pool.query(
     'SELECT pr.name, pr.brand, pr.price, pr.promote, pr.path, pr.rating, "dateRelease" FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.path, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10'
   );
@@ -152,7 +81,7 @@ const getTop10BestSellerProducts = async () => {
   return data.rows;
 };
 
-const getTop10HighRatingProducts = async () => {
+module.exports.getTop10HighRatingProducts = async () => {
   const data = await pool.query(
     'SELECT name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE rating >= 4 ORDER BY rating DESC LIMIT 10'
   );
@@ -160,15 +89,78 @@ const getTop10HighRatingProducts = async () => {
   return data.rows;
 };
 
-const getTop10AppleProducts = async () => {
+module.exports.getTop10AppleProducts = async () => {
   const data = await pool.query(
     'SELECT name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE brand = \'Apple\' ORDER BY "dateRelease" DESC LIMIT 10'
   );
   standardizedData(data);
   return data.rows;
 };
+// ***
 
-const getProductDetails = async path => {
+// *** DATA SHOWING ON PRODUCTS PAGE ***
+// Get products from query object
+module.exports.getProductsByQueryObject = async queryObj => {
+  const filteringParams = ["brand", "price"];
+
+  // Initialize default query string
+  let query =
+    'SELECT id, name, brand, price, promote, path, rating, "dateRelease", description FROM products WHERE (1 = 1)';
+
+  let queryCountTotal = "SELECT COUNT(*) FROM products WHERE (1 = 1)";
+
+  // Loop to build filtering condition
+  filteringParams.forEach(paramKey => {
+    if (queryObj[paramKey] !== undefined) {
+      let paramValues = [].concat(queryObj[paramKey]);
+
+      let paramQuery = "(1 = 0)";
+
+      paramValues.forEach(paramValue => {
+        paramQuery += " OR ";
+        if (paramKey === "price") paramQuery += priceQueryMap[paramValue];
+        else paramQuery += `(${paramKey} = '${paramValue}')`;
+      });
+
+      query += ` AND (${paramQuery})`;
+      queryCountTotal += ` AND (${paramQuery})`;
+    }
+  });
+
+  // Build ordering option
+  if (queryObj.sort !== undefined) {
+    query += " ORDER BY " + sortQueryMap[queryObj.sort];
+  } else {
+    query += ' ORDER BY "dateRelease" DESC'; // Default is ordering by newest date release
+  }
+
+  // Build paging
+  const pageSize = 6;
+
+  if (queryObj.page !== undefined) {
+    query += " OFFSET " + (queryObj.page - 1) * pageSize;
+  }
+
+  query += " LIMIT " + pageSize;
+
+  //
+  const countTotal = await pool.query(queryCountTotal);
+
+  let result = {};
+
+  result.totalItems = Number(countTotal.rows[0].count);
+
+  const data = await pool.query(query);
+  standardizedData(data);
+
+  result.data = data.rows;
+
+  return result;
+};
+// ***
+
+// *** DATA SHOWING ON SPECIFIC PRODUCT PAGE ***
+module.exports.getProductDetails = async path => {
   const data = await pool.query(
     "SELECT * FROM products WHERE path = '" + path + "'"
   );
@@ -176,21 +168,18 @@ const getProductDetails = async path => {
   return data.rows[0];
 };
 
-const getProductsByBrand = async brand => {
+module.exports.getProductsByBrand = async brand => {
   const data = await pool.query(
-    'SELECT id, name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE brand = \'' +
-      brand +
-      "'"
+    `SELECT id, name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE brand = '${brand}'`
   );
   standardizedData(data);
   return data.rows;
 };
+// ***
 
-module.exports.getTop10NewProducts = getTop10NewProducts;
-module.exports.getTop10BestSellerProducts = getTop10BestSellerProducts;
-module.exports.getTop10HighRatingProducts = getTop10HighRatingProducts;
-module.exports.getTop10AppleProducts = getTop10AppleProducts;
-module.exports.query = query;
-module.exports.getProductDetails = getProductDetails;
-module.exports.getProductsByBrand = getProductsByBrand;
-module.exports.queryBuilder = queryBuilder;
+module.exports.countProductsByBrand = async brand => {
+  const data = await pool.query(
+    `SELECT COUNT(*) FROM products WHERE brand = '${brand}'`
+  );
+  return data.rows[0].count;
+};

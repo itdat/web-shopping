@@ -1,13 +1,5 @@
-module.exports = function(req, res, next) {
+module.exports = (req, res) => {
   res.render("faq", {
-    title: "Câu hỏi thường gặp",
-    headerTop: function() {
-      if (req.isAuthenticated()) {
-        return "headerTopAuthenticated";
-      } else {
-        return "headerTopUnauthenticated";
-      }
-    },
-    error: req.flash("error")
+    title: "Câu hỏi thường gặp"
   });
 };

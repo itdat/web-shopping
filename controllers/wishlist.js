@@ -1,13 +1,5 @@
-module.exports = function(req, res, next) {
+module.exports = (req, res) => {
   res.render("wishlist", {
-    title: "Danh sách yêu thích",
-    headerTop: function() {
-      if (req.isAuthenticated()) {
-        return "headerTopAuthenticated";
-      } else {
-        return "headerTopUnauthenticated";
-      }
-    },
-    error: req.flash("error")
+    title: "Danh sách yêu thích"
   });
 };

@@ -1,26 +1,16 @@
-const { Pool } = require("pg");
 const brcypt = require("bcryptjs");
 
-require("dotenv").config();
+// Get pool connection
+const pool = require("../configs/database");
 
-// Database config
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
-  ssl: process.env.DB_SSL
-});
-
-const findUser = async email => {
+module.exports.findUser = async email => {
   const data = await pool.query(`SELECT * FROM users WHERE email = '${email}'`);
 
   if (data.rows.length == 0) return null;
   return data.rows[0];
 };
 
-const createNewUser = async (email, password) => {
+module.exports.createNewUser = async (email, password) => {
   try {
     const hashPassword = brcypt.hashSync(password);
 
@@ -52,6 +42,3 @@ const createNewUser = async (email, password) => {
     return false;
   }
 };
-
-module.exports.findUser = findUser;
-module.exports.createNewUser = createNewUser;

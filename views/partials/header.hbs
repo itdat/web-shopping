@@ -18,7 +18,11 @@
           <div class="header-top-right">
             <ul class="ht-menu">
               <!-- Begin Setting Area -->
-              {{> (headerTop) }}
+              {{#if authenticated}}
+              {{>headerTopAuthenticated}}
+              {{else}}
+              {{>headerTopUnauthenticated}}
+              {{/if}}
               <!-- Setting Area End Here -->
             </ul>
           </div>
