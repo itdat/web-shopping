@@ -7,30 +7,66 @@
         <div class="product-details-left">
           <div class="product-details-images slider-navigation-1">
             <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="/images/product/large-size/{{productDetails.images}}"
+              <a class="popup-img venobox vbox-item"
+                href="{{#if productDetails.images.[0]}}{{productDetails.images.[0]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 data-gall="myGallery">
-                <img src="/images/product/large-size/{{productDetails.images}}" alt="product image">
+                <img
+                  src="{{#if productDetails.images.[0]}}{{productDetails.images.[0]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                  alt="product image">
               </a>
             </div>
             <div class="lg-image">
-              <a class="popup-img venobox vbox-item" href="/images/product/large-size/{{productDetails.images}}"
+              <a class="popup-img venobox vbox-item"
+                href="{{#if productDetails.images.[1]}}{{productDetails.images.[1]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 data-gall="myGallery">
-                <img src="/images/product/large-size/{{productDetails.images}}" alt="product image">
+                <img
+                  src="{{#if productDetails.images.[1]}}{{productDetails.images.[1]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                  alt="product image">
+              </a>
+            </div>
+            <div class="lg-image">
+              <a class="popup-img venobox vbox-item"
+                href="{{#if productDetails.images.[2]}}{{productDetails.images.[2]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                data-gall="myGallery">
+                <img
+                  src="{{#if productDetails.images.[2]}}{{productDetails.images.[2]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                  alt="product image">
+              </a>
+            </div>
+            <div class="lg-image">
+              <a class="popup-img venobox vbox-item"
+                href="{{#if productDetails.images.[3]}}{{productDetails.images.[3]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                data-gall="myGallery">
+                <img
+                  src="{{#if productDetails.images.[3]}}{{productDetails.images.[3]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                  alt="product image">
+              </a>
+            </div>
+            <div class="lg-image">
+              <a class="popup-img venobox vbox-item"
+                href="{{#if productDetails.images.[4]}}{{productDetails.images.[4]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                data-gall="myGallery">
+                <img
+                  src="{{#if productDetails.images.[4]}}{{productDetails.images.[4]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
+                  alt="product image">
               </a>
             </div>
           </div>
           <div class="product-details-thumbs slider-thumbs-1">
-            <div class="sm-image"><img src="/images/product/large-size/{{productDetails.images}}"
+            <div class="sm-image"><img
+                src="{{#if productDetails.images.[0]}}{{productDetails.images.[0]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 alt="product image thumb"></div>
-            <div class="sm-image"><img src="/images/product/large-size/{{productDetails.images}}"
+            <div class="sm-image"><img
+                src="{{#if productDetails.images.[1]}}{{productDetails.images.[1]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 alt="product image thumb"></div>
-            <div class="sm-image"><img src="/images/product/large-size/{{productDetails.images}}"
+            <div class="sm-image"><img
+                src="{{#if productDetails.images.[2]}}{{productDetails.images.[2]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 alt="product image thumb"></div>
-            <div class="sm-image"><img src="/images/product/large-size/{{productDetails.images}}"
+            <div class="sm-image"><img
+                src="{{#if productDetails.images.[3]}}{{productDetails.images.[3]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 alt="product image thumb"></div>
-            <div class="sm-image"><img src="/images/product/large-size/{{productDetails.images}}"
-                alt="product image thumb"></div>
-            <div class="sm-image"><img src="/images/product/large-size/{{productDetails.images}}"
+            <div class="sm-image"><img
+                src="{{#if productDetails.images.[4]}}{{productDetails.images.[4]}}{{else}}/images/product/large-size/default.jpg{{/if}}"
                 alt="product image thumb"></div>
           </div>
         </div>
@@ -493,7 +529,7 @@
               <div class="single-product-wrap">
                 <div class="product-image">
                   <a href="/single-product.html">
-                    <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
+                    <img src="{{images.[0]}}" alt="Li's P.[0]roduct Image">
                   </a>
                   {{#if new}}
                   <span class="sticker">Mới</span>

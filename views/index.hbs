@@ -107,7 +107,7 @@
               <div class="single-product-wrap">
                 <div class="product-image">
                   <a href="/products/{{path}}">
-                    <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
+                    <img src="{{images.[0]}}" alt="Li's Product Image">
                   </a>
                   {{#if new}}
                   <span class="sticker">Mới</span>
@@ -121,11 +121,8 @@
                       </h5>
                       <div class="rating-box">
                         <ul class="rating">
-                          <li class="{{rating.[0]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[1]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[2]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[3]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[4]}}"><i class="fa fa-star"></i></li>
+                          {{#showRating rating}}
+                          {{/showRating}}
                         </ul>
                       </div>
                     </div>
@@ -162,7 +159,7 @@
               <div class="single-product-wrap">
                 <div class="product-image">
                   <a href="/products/{{path}}">
-                    <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
+                    <img src="{{images.[0]}}" alt="Li's Product Image">
                   </a>
                   {{#if new}}
                   <span class="sticker">Mới</span>
@@ -176,11 +173,8 @@
                       </h5>
                       <div class="rating-box">
                         <ul class="rating">
-                          <li class="{{rating.[0]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[1]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[2]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[3]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[4]}}"><i class="fa fa-star"></i></li>
+                          {{#showRating rating}}
+                          {{/showRating}}
                         </ul>
                       </div>
                     </div>
@@ -217,7 +211,7 @@
               <div class="single-product-wrap">
                 <div class="product-image">
                   <a href="/products/{{path}}">
-                    <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
+                    <img src="{{images.[0]}}" alt="Li's Product Image">
                   </a>
                   {{#if new}}
                   <span class="sticker">Mới</span>
@@ -231,11 +225,8 @@
                       </h5>
                       <div class="rating-box">
                         <ul class="rating">
-                          <li class="{{rating.[0]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[1]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[2]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[3]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[4]}}"><i class="fa fa-star"></i></li>
+                          {{#showRating rating}}
+                          {{/showRating}}
                         </ul>
                       </div>
                     </div>
@@ -318,7 +309,7 @@
               <div class="single-product-wrap">
                 <div class="product-image">
                   <a href="/products/{{path}}">
-                    <img src="/images/product/large-size/{{images}}" alt="Li's Product Image">
+                    <img src="{{images.[0]}}" alt="Li's Product Image">
                   </a>
                   {{#if new}}
                   <span class="sticker">Mới</span>
@@ -332,11 +323,8 @@
                       </h5>
                       <div class="rating-box">
                         <ul class="rating">
-                          <li class="{{rating.[0]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[1]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[2]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[3]}}"><i class="fa fa-star"></i></li>
-                          <li class="{{rating.[4]}}"><i class="fa fa-star"></i></li>
+                          {{#showRating rating}}
+                          {{/showRating}}
                         </ul>
                       </div>
                     </div>
@@ -397,7 +385,7 @@
 </div>
 <!-- Li's Static Home Area End Here -->
 <!-- Begin Group Featured Product Area -->
-<div class="group-featured-product pt-60 pb-40 pb-xs-25">
+{{!-- <div class="group-featured-product pt-60 pb-40 pb-xs-25">
   <div class="container">
     <div class="row">
       <!-- Begin Featured Product Area -->
@@ -717,5 +705,5 @@
       <!-- Featured Product Area End Here -->
     </div>
   </div>
-</div>
+</div> --}}
 <!-- Group Featured Product Area End Here -->

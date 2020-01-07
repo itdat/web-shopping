@@ -46,9 +46,9 @@ function standardizedData(products) {
     );
   });
 
-  // Image
+  // Images
   products.rows.map(product => {
-    product.images = product.path + "-1.jpg";
+    product.images = product.images.split("|");
   });
 
   // New status
@@ -67,7 +67,7 @@ function standardizedData(products) {
 // *** DATA SHOWING ON LANDING PAGE ***
 module.exports.getTop10NewProducts = async () => {
   const data = await pool.query(
-    'SELECT name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE (SELECT DATEDIFF(\'day\', "dateRelease"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10'
+    'SELECT name, brand, price, promote, path, rating, "dateRelease", images FROM products WHERE (SELECT DATEDIFF(\'day\', "dateRelease"::timestamp, current_date::timestamp)) BETWEEN 0 AND 30 LIMIT 10'
   );
   standardizedData(data);
   return data.rows;
@@ -75,7 +75,7 @@ module.exports.getTop10NewProducts = async () => {
 
 module.exports.getTop10BestSellerProducts = async () => {
   const data = await pool.query(
-    'SELECT pr.name, pr.brand, pr.price, pr.promote, pr.path, pr.rating, "dateRelease" FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.path, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10'
+    'SELECT pr.name, pr.brand, pr.price, pr.promote, pr.path, pr.rating, "dateRelease", images FROM products pr JOIN receipt_details rd ON pr.id = rd.id_product GROUP BY pr.id, pr.name, pr.brand, pr.price, pr.promote, pr.path, pr.rating HAVING SUM(rd.quantity) >= 5 LIMIT 10'
   );
   standardizedData(data);
   return data.rows;
@@ -83,7 +83,7 @@ module.exports.getTop10BestSellerProducts = async () => {
 
 module.exports.getTop10HighRatingProducts = async () => {
   const data = await pool.query(
-    'SELECT name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE rating >= 4 ORDER BY rating DESC LIMIT 10'
+    'SELECT name, brand, price, promote, path, rating, "dateRelease", images FROM products WHERE rating >= 4 ORDER BY rating DESC LIMIT 10'
   );
   standardizedData(data);
   return data.rows;
@@ -91,7 +91,7 @@ module.exports.getTop10HighRatingProducts = async () => {
 
 module.exports.getTop10AppleProducts = async () => {
   const data = await pool.query(
-    'SELECT name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE brand = \'Apple\' ORDER BY "dateRelease" DESC LIMIT 10'
+    'SELECT name, brand, price, promote, path, rating, "dateRelease", images FROM products WHERE brand = \'Apple\' ORDER BY "dateRelease" DESC LIMIT 10'
   );
   standardizedData(data);
   return data.rows;
@@ -105,7 +105,7 @@ module.exports.getProductsByQueryObject = async queryObj => {
 
   // Initialize default query string
   let query =
-    'SELECT id, name, brand, price, promote, path, rating, "dateRelease", description FROM products WHERE (1 = 1)';
+    'SELECT id, name, brand, price, promote, path, rating, "dateRelease", description, images FROM products WHERE (1 = 1)';
 
   let queryCountTotal = "SELECT COUNT(*) FROM products WHERE (1 = 1)";
 
@@ -170,7 +170,7 @@ module.exports.getProductDetails = async path => {
 
 module.exports.getProductsByBrand = async brand => {
   const data = await pool.query(
-    `SELECT id, name, brand, price, promote, path, rating, "dateRelease" FROM products WHERE brand = '${brand}'`
+    `SELECT id, name, brand, price, promote, path, rating, "dateRelease", images FROM products WHERE brand = '${brand}'`
   );
   standardizedData(data);
   return data.rows;
