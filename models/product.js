@@ -40,10 +40,14 @@ function standardizedData(products) {
 
   // New price
   products.rows.map(product => {
-    product.newPrice = formatNumber(
-      Number(product.price.replace(/[^0-9.-]+/g, "")) *
+    let newPrice = Math.ceil(
+      Number(product.price.replace(/[^0-9]+/g, "")) *
         (1 - product.promote / 100)
     );
+    newPrice =
+      Math.floor(newPrice / 1000) * 1000 + (newPrice % 1000 >= 500) * 1000;
+
+    product.newPrice = formatNumber(Math.floor(newPrice));
   });
 
   // Images
